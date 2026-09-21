@@ -1,0 +1,603 @@
+(function( $ ) {
+	'use strict';
+
+	/**
+	 * All of the code for your admin-facing JavaScript source
+	 * should reside in this file.
+	 *
+	 * Note: It has been assumed you will write jQuery code here, so the
+	 * $ function reference has been prepared for usage within the scope
+	 * of this function.
+	 *
+	 * This enables you to define handlers, for when the DOM is ready:
+	 *
+	 * $(function() {
+	 *
+	 * });
+	 *
+	 * When the window is loaded:
+	 *
+	 * $( window ).load(function() {
+	 *
+	 * });
+	 *
+	 * ...and/or other possibilities.
+	 *
+	 * Ideally, it is not considered best practise to attach more than a
+	 * single DOM-ready or window-load handler for a particular page.
+	 * Although scripts in the WordPress core, Plugins and Themes may be
+	 * practising this, we should strive to set a better example in our own work.
+	 */
+	jQuery(document).ready(function(){
+		jQuery('.delete_all_datepicker').datepicker({
+			changeMonth: true,
+			changeYear: true,
+			dateFormat: 'yy-mm-dd'
+		});
+	});
+
+	// Delete posts form handle.
+	jQuery(document).ready(function() {
+	    jQuery('#delete_posts_submit').on( 'click', function() {
+
+			let proceed = validateSchedule("delete_posts_form");
+			if(!proceed) return;
+
+			if(jQuery('input[name="delete_time"]:checked').val() === "scheduled"){
+				jQuery("#delete_posts_form").attr('action', wpBulkDeleteData.siteUrl + '/wp-admin/admin-post.php');
+				jQuery("#delete_posts_form").submit();
+				return;
+			}
+	        var deleteform = jQuery("#delete_posts_form").serialize();
+	        var data = {
+	            'action': 'delete_posts_count',
+	            'form': deleteform
+			};
+	        jQuery(".spinner").addClass("is-active");
+	        jQuery.post(ajaxurl, data, function(response) {
+	            if( response != '' ){
+	                var response = jQuery.parseJSON( response );
+	                if( response.status == 0 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice notice-error is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                } else if( response.status == 2 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice notice-success is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                    jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+	                } else if( response.status == 1 ){
+	                    if ( confirm(  response.post_count + ' posts will be delete. Would you like to proceed further?'  ) ){
+	                        jQuery("#delete_posts_form").submit(); 
+	                    } 
+	                }
+	            }
+	            jQuery(".spinner").removeClass("is-active");
+	        });    
+	    });
+	});
+
+	// Render Dynamic taxomony.
+	jQuery(document).ready(function() {
+	    jQuery('#delete_post_type').on( 'change', function() {
+	    	var post_type = jQuery(this).val();
+	        var data = {
+	            'action': 'render_taxonomy_by_posttype',
+	            'post_type': post_type
+	        };
+
+	        var taxomony_space = jQuery('.post_taxonomy');
+	        jQuery('.taxo_terms_title').html('');
+	        jQuery('.post_taxo_terms').html('');
+	        taxomony_space.html('<span class="spinner is-active" style="float: none;"></span>');
+	        // send ajax request.
+	        jQuery.post(ajaxurl, data, function(response) {
+	            if( response != '' ){
+	            	taxomony_space.html( response );
+	            }else{
+	            	taxomony_space.html( '' );
+	            }	            
+	        });    
+	    });                    
+	});
+
+	// Render Dynamic Terms.
+	jQuery(document).ready(function() {
+	    jQuery(document).on( 'change', '.post_taxonomy_radio', function() {
+
+	    	var post_taxomony = jQuery(this).val();
+	    	var xt_taxonomy_title = jQuery(this).attr( 'title' );
+			jQuery('.taxo_terms_title').html( xt_taxonomy_title + ':');
+	        var data = {
+	            'action': 'render_terms_by_taxonomy',
+	            'post_taxomony': post_taxomony
+	        };
+
+	        var terms_space = jQuery('.post_taxo_terms');
+	        terms_space.html('<span class="spinner is-active" style="float: none;"></span>');
+	        // send ajax request.
+	        jQuery.post(ajaxurl, data, function(response) {
+	            if( response != '' ){
+	            	terms_space.html( response );
+	            	jQuery(".taxonomy_terms_select").chosen({placeholder_text_multiple:"Select "+xt_taxonomy_title });
+	            }else{
+	            	terms_space.html( '' );
+	            }	            
+	        });
+
+	        // Load term meta filter section
+	        wpbd_load_term_meta_filter( post_taxomony );
+	    });
+		
+		jQuery(document).on( 'change', '.taxonomy_terms_select', function() {
+			if (jQuery(this).val().length > 0) {
+				jQuery("#delete_selected_category_section").show();
+			} else {
+				jQuery("#delete_selected_category_section").hide();
+			}
+		});
+	});
+
+	/**
+	 * Load Term Meta Filter section based on selected taxonomy
+	 */
+	function wpbd_load_term_meta_filter( taxonomy ) {
+		var term_meta_space = jQuery('.term_meta_filter_section');
+		var term_meta_dropdown = jQuery('#term_meta_key');
+		
+		if ( taxonomy !== '' ) {
+			var data = {
+				'action': 'render_termmeta_keys_by_taxonomy',
+				'taxonomy': taxonomy
+			};
+			
+			// Show spinner in the dropdown
+			term_meta_dropdown.html('<option value="">Loading...</option>');
+			term_meta_space.show();
+			
+			jQuery.post(ajaxurl, data, function(response) {
+				if( response != '' ) {
+					term_meta_dropdown.html( '<option value="">Select Term Meta Key</option>' + response );
+				} else {
+					term_meta_dropdown.html( '<option value="">No meta keys found</option>' );
+				}
+				term_meta_dropdown.trigger('chosen:updated');
+			});
+		} else {
+			term_meta_space.hide();
+		}
+	}
+
+
+	// Delete users form handle.
+	jQuery(document).ready(function() {
+	    jQuery('#delete_users_submit').on( 'click', function() {
+
+			let uproceed = validateSchedule("delete_users_form");
+			if(!uproceed) return;
+
+			if(jQuery('input[name="delete_time"]:checked').val() === "scheduled"){
+				jQuery("#delete_users_form").attr('action', wpBulkDeleteData.siteUrl + '/wp-admin/admin-post.php');
+				jQuery("#delete_users_form").submit();
+				return;
+			}
+	        var deleteuserform = jQuery("#delete_users_form").serialize();
+	        var data = {
+	            'action': 'delete_users_count',
+	            'form': deleteuserform
+	        };
+	        jQuery(".spinner").addClass("is-active");
+	        jQuery.post(ajaxurl, data, function(response) {
+	            if( response != '' ){
+	                var response = jQuery.parseJSON( response );
+	                if( response.status == 0 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice notice-error is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                } else if( response.status == 2 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice notice-success is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                    jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+	                } else if( response.status == 1 ){
+	                    if ( confirm(  response.post_count + ' users will be delete. Would you like to proceed further?'  ) ){
+	                        jQuery("#delete_users_form").submit();    
+	                    } 
+	                }
+	            }
+	            jQuery(".spinner").removeClass("is-active");
+	        });    
+	    });                    
+	});
+
+	// Delete comments form handle.
+	jQuery(document).ready(function() {
+	    jQuery('#delete_comments_submit').on( 'click', function() {
+
+			let cproceed = validateSchedule("delete_comments_form");
+			if(!cproceed) return;
+
+			if(jQuery('input[name="delete_time"]:checked').val() === "scheduled"){
+				jQuery("#delete_comments_form").attr('action', wpBulkDeleteData.siteUrl + '/wp-admin/admin-post.php');
+				jQuery("#delete_comments_form").submit();
+				return;
+			}
+	        var deletecommentform = jQuery("#delete_comments_form").serialize();
+	        var data = {
+	            'action': 'delete_comments_count',
+	            'form': deletecommentform
+	        };
+	        jQuery(".spinner").addClass("is-active");
+	        jQuery.post(ajaxurl, data, function(response) {
+	            if( response != '' ){
+	                var response = jQuery.parseJSON( response );
+	                if( response.status == 0 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice notice-error is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                } else if( response.status == 2 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice notice-success is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                    jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+	                } else if( response.status == 1 ){
+	                    if ( confirm(  response.post_count + ' comments will be delete. Would you like to proceed further?'  ) ){
+	                        jQuery("#delete_comments_form").submit();    
+	                    } 
+	                }
+	            }
+	            jQuery(".spinner").removeClass("is-active");
+	        });    
+	    });                    
+	});
+
+	jQuery(document).ready(function(){
+		jQuery('#with_custom_query').on('change', function(){
+			if( jQuery('#with_custom_query').is(':checked') ){
+				jQuery('input[name="delete_type"][value="permenant"]').prop('checked',true);
+				jQuery('input[name=delete_type][value="trash"]').prop("disabled",true);
+			}else{
+				jQuery('input[name=delete_type][value="trash"]').prop("disabled",false);
+			}
+		});
+		jQuery("#with_custom_query").trigger("checked");
+	});
+
+	// Delete meta form handle.
+	jQuery(document).ready(function() {
+	    jQuery('#delete_meta_submit').on( 'click', function() {
+			if(jQuery('input[name="delete_time"]:checked').val() === "scheduled"){
+				jQuery("#delete_meta_form").submit();
+				return;
+			}
+	        var metaform = jQuery("#delete_meta_form").serialize();
+	        var data = {
+	            'action': 'delete_meta_count',
+	            'form': metaform
+	        };
+	        jQuery(".spinner").addClass("is-active");
+	        jQuery.post(ajaxurl, data, function(response) {
+	            if( response != '' ){
+	                var response = jQuery.parseJSON( response );
+	                if( response.status == 0 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice wpbd-notice notice-error is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                } else if( response.status == 2 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice wpbd-notice notice-success is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                    jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+	                } else if( response.status == 1 ){
+	                    if ( confirm(  response.post_count + ' meta will be delete. Would you like to proceed further?'  ) ){
+	                        jQuery("#delete_meta_form").submit();    
+	                    } 
+	                }
+	            }
+	            jQuery(".spinner").removeClass("is-active");
+	        });    
+	    });                    
+	});
+
+
+	// Delete meta form handle.
+	jQuery(document).ready(function() {
+	    jQuery('#delete_terms_submit').on( 'click', function() {
+	        var termform = jQuery("#delete_terms_form").serialize();
+	        var data = {
+	            'action': 'delete_terms_count',
+	            'form': termform
+	        };
+	        jQuery(".spinner").addClass("is-active");
+	        jQuery.post(ajaxurl, data, function(response) {
+	            if( response != '' ){
+	                var response = jQuery.parseJSON( response );
+	                if( response.status == 0 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice notice-error is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                } else if( response.status == 2 ){
+	                    jQuery(".delete_notice").html('<div class="notice wpbd-notice notice-success is-dismissible"><p><strong>' + response.messages + '</strong></p></div>');
+	                    jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+	                } else if( response.status == 1 ){
+	                    if ( confirm(  response.post_count + ' Terms will be delete. Would you like to proceed further?'  ) ){
+	                        jQuery("#delete_terms_form").submit();    
+	                    } 
+	                }
+	            }
+	            jQuery(".spinner").removeClass("is-active");
+	        });    
+	    });                    
+	});
+
+	// 
+	jQuery(document).ready(function(){
+		jQuery(".wpbd_global_multiple_select").chosen({ 
+			max_selected_options: 100, 
+			placeholder_text_multiple: "Select Multiple options...", 
+			width : '100%', 
+			clearAll: true 
+		});
+	});	
+
+	// Render Dynamic post dropdown.
+	jQuery(document).ready(function() {
+	    jQuery('#meta_post_type').on( 'change', function() {
+	    	var post_type = jQuery(this).val();
+	        var data = {
+	            'action': 'render_postdropdown_by_posttype',
+	            'post_type': post_type
+	        };
+
+	        var postdropdown_space = jQuery('.postdropdown_space');
+	        postdropdown_space.html('<span class="spinner is-active" style="float: none;"></span>');
+	        // send ajax request.
+	        jQuery.post(ajaxurl, data, function(response) {
+	            if( response != '' ){
+	            	postdropdown_space.html( response );
+	            	jQuery(".post_for_meta").chosen({placeholder_text_multiple:"Select posts"});
+	            }else{
+	            	postdropdown_space.html( '' );
+	            }	            
+	        });    
+		});
+		
+		jQuery('.date_type').on( 'change', function() {
+	    	var date_type = jQuery(this).val();
+	        if( date_type === 'custom_date' ){
+				jQuery(".wpbd_date_days").hide();
+				jQuery(".wpbd_custom_interval").show();
+				jQuery(".wpbd_date_range").hide();
+			}else if( date_type === 'within_last' || date_type === 'older_than' ){
+				jQuery(".wpbd_custom_interval").hide();
+				jQuery(".wpbd_date_days").show();
+				jQuery(".wpbd_date_range").hide();
+			}else{
+				jQuery(".wpbd_custom_interval").hide();
+				jQuery(".wpbd_date_days").hide();
+				jQuery(".wpbd_date_range").show();
+			}
+		});
+
+		jQuery('.mdate_type').on( 'change', function() {
+	    	var mdate_type = jQuery(this).val();
+	        if( mdate_type === 'mcustom_date'){
+				jQuery(".mwpbd_date_days").hide();
+				jQuery(".mwpbd_custom_interval").show();
+			}else{
+				jQuery(".mwpbd_custom_interval").hide();
+				jQuery(".mwpbd_date_days").show();
+			}
+		});
+
+		jQuery(".wpbd_schedule_name_wrap").show();
+	});
+
+	jQuery(document).ready(function(){
+		jQuery('.delete_all_datetimepicker').datetimepicker({
+			dateFormat: 'yy-mm-dd', 
+			timeFormat: 'HH:mm:ss'
+		});
+	});
+
+	jQuery(document).ready(function(){
+		jQuery("#user_who_has_no_order").change(function() {
+			if (jQuery(this).is(":checked")) {
+				jQuery("#delete_user_roles_multiple").val(['customer']).trigger("chosen:updated");
+			} else {
+				jQuery("#delete_user_roles_multiple").trigger("chosen:updated");
+			}
+		});
+
+		jQuery( "#delete_user_roles_multiple" ).change(function() {
+			//here get chosent it's value
+			if( jQuery('#user_who_has_no_order').is(":checked") ){
+				var selectedRoles = jQuery(this).val();
+				console.log( selectedRoles );
+				if (selectedRoles && selectedRoles.length > 0) {
+					var hasOtherRoles = selectedRoles.some(role => role !== "customer");
+		
+					if (hasOtherRoles) {
+						alert('The "User Who Has No Order" option only works with the Customer role.');
+						jQuery(this).val(['customer']).trigger("chosen:updated");
+					}
+				}
+			}
+		});
+
+		jQuery('.wpbd-collapsible').on('click', function() {
+			jQuery(this).toggleClass('wpbd-active');
+			jQuery(this).next('.wpbd-collapse-content').slideToggle();
+		});
+
+		jQuery('.header.toggles').on('click', function() {
+			var content = jQuery(this).next('.content');
+			var svgIcon = jQuery(this).find('.wpbd-caret');
+			var isExpanded = content.attr('aria-expanded') === 'true';
+	
+			// Toggle the content visibility
+			content.slideToggle();
+	
+			// Update the aria-expanded attribute
+			content.attr('aria-expanded', !isExpanded);
+	
+			// Toggle the rotated class on the SVG
+			svgIcon.toggleClass('rotated');
+		});
+
+		function updateSelectAllState() {
+			var total = jQuery('.cleanup_post_type').length;
+			if (total > 0) {
+				var checked = jQuery('.cleanup_post_type:checked').length;
+				jQuery('#select_all').prop('checked', total === checked);
+			}
+		}
+
+		jQuery('#select_all').change(function() {
+            var isChecked = jQuery(this).is(':checked');
+            jQuery('.cleanup_post_type').each(function() {
+                if (jQuery(this).prop('checked') !== isChecked) {
+                    jQuery(this).prop('checked', isChecked).trigger('change');
+                }
+            });
+            jQuery('.cleanup_revision_post_types, .cleanup_trash_post_types, .cleanup_auto_drafts_post_types, .cleanup_meta_post_types').prop('checked', isChecked);
+        });
+
+        jQuery(document).on('click', '.cleanup-select-all-pts', function(e) {
+            e.preventDefault();
+            var targetClass = jQuery(this).data('target');
+            jQuery('.' + targetClass).prop('checked', true);
+        });
+
+        jQuery(document).on('click', '.cleanup-clear-all-pts', function(e) {
+            e.preventDefault();
+            var targetClass = jQuery(this).data('target');
+            jQuery('.' + targetClass).prop('checked', false);
+        });
+
+		jQuery('.cleanup_post_type').change(function() {
+			var isChecked = jQuery(this).is(':checked');
+			var val = jQuery(this).val();
+			var targetId;
+			if (val === 'all_orphan_duplicate') {
+				targetId = '#all_orphan_duplicate_advanced';
+			} else {
+				targetId = '#cleanup_' + val + '_advanced';
+			}
+			if (isChecked) {
+				jQuery(targetId).slideDown();
+			} else {
+				jQuery(targetId).slideUp();
+			}
+			updateSelectAllState();
+		});
+
+		// Run initially on load to set correct state
+		updateSelectAllState();
+
+		// Fetch post type counts for cleanup advanced options on page load
+		if ( jQuery('.cleanup-advanced-options').length ) {
+			jQuery.ajax({
+				url: ajaxurl,
+				type: 'POST',
+				data: {
+					action: 'wpbd_get_cleanup_post_type_counts'
+				},
+				success: function(response) {
+					if ( response.success ) {
+						var counts = response.data;
+
+						// 1. Revisions
+						jQuery('.cleanup_revision_post_types').each(function() {
+							var $input = jQuery(this);
+							var postType = $input.val();
+							var count = counts.revision[postType] || 0;
+							if ( count === 0 ) {
+								$input.closest('label').hide();
+							} else {
+								$input.parent().append(' <span class="cleanup-pt-count" style="color: #666; font-size: 11px;">(' + count + ')</span>');
+							}
+						});
+
+						// 2. Trash
+						jQuery('.cleanup_trash_post_types').each(function() {
+							var $input = jQuery(this);
+							var postType = $input.val();
+							var count = counts.trash[postType] || 0;
+							if ( count === 0 ) {
+								$input.closest('label').hide();
+							} else {
+								$input.parent().append(' <span class="cleanup-pt-count" style="color: #666; font-size: 11px;">(' + count + ')</span>');
+							}
+						});
+
+						// 3. Auto drafts
+						jQuery('.cleanup_auto_drafts_post_types').each(function() {
+							var $input = jQuery(this);
+							var postType = $input.val();
+							var count = counts.auto_drafts[postType] || 0;
+							if ( count === 0 ) {
+								$input.closest('label').hide();
+							} else {
+								$input.parent().append(' <span class="cleanup-pt-count" style="color: #666; font-size: 11px;">(' + count + ')</span>');
+							}
+						});
+
+						// 4. Metadata cleanup
+						jQuery('.cleanup_meta_post_types').each(function() {
+							var $input = jQuery(this);
+							var postType = $input.val();
+							var count = counts.meta[postType] || 0;
+							if ( count === 0 ) {
+								$input.closest('label').hide();
+							} else {
+								$input.parent().append(' <span class="cleanup-pt-count" style="color: #666; font-size: 11px;">(' + count + ')</span>');
+							}
+						});
+					}
+				}
+			});
+		}
+
+		jQuery('#run_post_cleanup_submit').on('click', function() {
+			// Validate that at least one cleanup type is selected
+			var checkedTypes = jQuery('.cleanup_post_type:checked');
+			if (checkedTypes.length === 0) {
+				jQuery('.cleanup_delete_notice').html('<div class="notice wpbd-notice notice-error is-dismissible"><p><strong>Please select at least one cleanup type to proceed.</strong></p></div>');
+				jQuery('html, body').animate({ scrollTop: jQuery('.cleanup_delete_notice').offset().top - 80 }, 500);
+				return;
+			}
+			// Trigger form submit — wpbd-progress.js will intercept this
+			// and handle via AJAX batched deletion with progress bar
+			jQuery("#cleanup").submit();
+		});
+	});
+
+	function validateSchedule(formId) {
+		let selected = jQuery('input[name="delete_time"]:checked').val();
+
+		if(selected === "scheduled"){
+			let datetime = jQuery("#delete_datetime").val().trim();
+			let schedulename = jQuery("input[name='schedule_name']").val().trim();
+
+			if(datetime === ""){
+				alert("Please select a scheduled date & time.");
+				return false;
+			}
+
+			if(schedulename === ""){
+				alert("Please enter a schedule name.");
+				return false;
+			}
+
+			jQuery("#" + formId).attr('action', wpBulkDeleteData.siteUrl + '/wp-admin/admin-post.php');
+			jQuery("#" + formId).submit();
+			return false;
+		}
+
+		return true;
+	}
+
+	function toggleInputs() {
+		var userMetaVal    = $('select[name="user_meta_compare"]').val();
+		var customFieldVal = $('select[name="custom_field_compare"]').val();
+		var termMetaVal    = $('select[name="term_meta_compare"]').val();
+		var disable        = ['not_exist', 'is_null', 'is_not_null'];
+
+		if (disable.includes(userMetaVal) || disable.includes(customFieldVal) || disable.includes(termMetaVal)) {
+			$('.user_meta_value, .custom_field_value, .term_meta_value').prop('disabled', true);
+		} else {
+			$('.user_meta_value, .custom_field_value, .term_meta_value').prop('disabled', false);
+		}
+	}
+
+	jQuery(document).ready(function() {
+		$('select[name="user_meta_compare"], select[name="custom_field_compare"], select[name="term_meta_compare"]').on('change', toggleInputs);
+		toggleInputs();
+	});
+
+})( jQuery );
+
+

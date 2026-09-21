@@ -1,0 +1,15 @@
+# canonical host: apex, https, no www
+https://www.casinomyinsider.com/*      https://casinomyinsider.com/:splat   301!
+http://www.casinomyinsider.com/*       https://casinomyinsider.com/:splat   301!
+http://casinomyinsider.com/*           https://casinomyinsider.com/:splat   301!
+
+# retired WordPress paths
+/category/uncategorized/   /   301
+/category/*                /   301
+/author/*/feed/            /author/:splat/   301
+/wp-admin/*                /   301
+/wp-content/*              /   301
+/wp-includes/*             /   301
+/index.php                 /   301
+/feed/                     /   301
+/*.php                     /   301

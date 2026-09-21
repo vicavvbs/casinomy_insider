@@ -1,0 +1,24 @@
+{
+  "name": "casinomy-insider",
+  "version": "1.0.0",
+  "description": "Static rebuild of the CasinoMY Insider site",
+  "scripts": {
+    "extract": "node tools/extract.mjs",
+    "build": "node build.mjs",
+    "verify": "node tools/verify.mjs",
+    "validate": "html-validate \"dist/**/*.html\"",
+    "preview": "serve dist -l 5173",
+    "preview:source": "serve source -l 5174",
+    "check": "npm run build && npm run validate && npm run verify && npm run report",
+    "report": "node tools/seo-report.mjs"
+  },
+  "type": "module",
+  "devDependencies": {
+    "html-validate": "^11.16.0",
+    "node-html-parser": "^9.0.4",
+    "parse5": "^8.0.1",
+    "serve": "^14.2.6",
+    "sharp": "^0.35.4"
+  },
+  "private": true
+}
