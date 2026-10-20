@@ -386,3 +386,19 @@ figure { margin: 0 0 1rem; }
   background: #f1f3f4; border-radius: var(--radius-sm); padding: 12px 16px; margin: 16px 0 0;
 }
 .cta-pending svg { width: 18px; height: 18px; color: var(--muted); flex: none; margin-top: 3px; }
+
+/* ---------- static page review stamp ---------- */
+.review-stamp {
+  margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--line);
+  font-size: .85rem; color: var(--muted);
+}
+
+/* ---------- review verdict ---------- */
+.verdict .fit-grid { display: grid; gap: 16px; margin: 18px 0; }
+.verdict .fit-grid h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-size: 1.05rem; }
+.verdict .fit-grid svg { width: 18px; height: 18px; }
+.verdict .fit-yes h3 { color: var(--good); }
+.verdict .fit-no h3 { color: var(--bad); }
+.verdict .fit-grid p { margin: 0; }
+.verdict .fit-yes, .verdict .fit-no { background: #fafbfb; border-radius: var(--radius-sm); padding: 14px 16px; }
+@media (min-width: 640px) { .verdict .fit-grid { grid-template-columns: 1fr 1fr; } }

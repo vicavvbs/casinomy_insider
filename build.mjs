@@ -13,6 +13,10 @@ import { HOMEPAGE } from './content/homepage.mjs';
 import { CASINO_FACTS } from './content/casino-facts.mjs';
 import { REVIEW_COPY } from './content/review-intros.mjs';
 import { PAGE_COPY } from './content/page-copy.mjs';
+import { STATIC_PAGES } from './content/static-pages.mjs';
+import { HUB } from './content/hub.mjs';
+import { VERDICTS } from './content/verdicts.mjs';
+import { AUTHOR_HUB, AUTHOR_BIOS } from './content/authors.mjs';
 import { createRewriter, demote, toText, imageKey } from './lib/content.mjs';
 import sharp from 'sharp';
 import { buildImages } from './lib/images.mjs';
@@ -219,6 +223,7 @@ function buildReview(c, rewrite, images) {
   const logo = images.get(imageKey(c.logo));
   const heroImg = c.hero ? images.get(imageKey(c.hero)) : null;
   const copy = REVIEW_COPY[c.slug];
+  const verdict = VERDICTS[c.slug];
   const written = authorBySlug.get(c.writtenBy?.slug);
   const reviewer = authorBySlug.get(c.reviewedBy?.slug);
   const date = fmtDate(c.dateModified);
@@ -253,6 +258,19 @@ function buildReview(c, rewrite, images) {
     const rest = bodyHtml.slice(tldrH2.index + tldrH2[0].length);
     const next = rest.search(/<h2[\s>]/i);
     bodyHtml = bodyHtml.slice(0, tldrH2.index) + (next > -1 ? rest.slice(next) : '');
+  }
+
+  /* Drop the per-review "Legal Landscape" and "Responsible Gambling Tools"
+     sections. Both repeat site-wide guidance on all 14 money pages; the
+     canonical versions now live on /responsible-gambling/, which each review
+     links to instead. */
+  for (const re of [/legal landscape/i, /responsible gambling tool/i, /^\s*conclusion\s*$/i]) {
+    const h = [...bodyHtml.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)]
+      .find(m => re.test(m[1].replace(/<[^>]+>/g, '')));
+    if (!h) continue;
+    const rest = bodyHtml.slice(h.index + h[0].length);
+    const next = rest.search(/<h2[\s>]/i);
+    bodyHtml = bodyHtml.slice(0, h.index) + (next > -1 ? rest.slice(next) : '');
   }
 
   /* body: strip the FAQ block (rendered as an accordion instead) */
@@ -313,6 +331,17 @@ function buildReview(c, rewrite, images) {
     ${rewrite(bodyHtml, { fallbackAlt: `${c.name} online casino`, lcp: false })}
   </div>
 
+  ${verdict ? `<section class="panel verdict" aria-labelledby="verdict-h">
+    <h2 id="verdict-h">Our verdict on ${esc(c.name)}</h2>
+    ${verdict.verdict}
+    <div class="fit-grid">
+      <div class="fit-yes"><h3>${icon('check')} Worth it for</h3><p>${esc(verdict.suits.charAt(0).toUpperCase() + verdict.suits.slice(1))}.</p></div>
+      <div class="fit-no"><h3>${icon('cross')} Look elsewhere if you are</h3><p>${esc(verdict.skip.charAt(0).toUpperCase() + verdict.skip.slice(1))}.</p></div>
+    </div>
+    <h3>The bottom line</h3>
+    ${verdict.conclusion}
+  </section>` : ''}
+
   ${c.faq.length ? `<section class="panel" aria-labelledby="faq-h">
     <h2 id="faq-h">FAQs about ${esc(c.name)}</h2>
     ${faqBlock(c.faq, c.slug)}
@@ -356,9 +385,10 @@ function buildHub(rewrite, images) {
   const body = `<div class="container">
   <div class="text-area">
     <h1>${esc(m.h1)}</h1>
-    <p>Every casino below was opened with our own money, funded through a Malaysian payment method, played and then cashed out. We score licensing, bonus terms, game range, payout speed, mobile experience and support against the same <a href="/editorial-guidelines/">published criteria</a>, and each review names the writer and the second reviewer who checked it.</p>
+    ${HUB.intro}
   </div>
   <div class="oc-grid">${cards}</div>
+  <div class="text-area">${HUB.guide}</div>
 </div>`;
 
   pages.push({ url, indexable: true, lastmod: data.hub.dateModified,
@@ -377,10 +407,13 @@ function buildStatic(s, rewrite, images) {
       datePublished: s.datePublished, dateModified: s.dateModified }),
   ]);
   const extra = PAGE_COPY[url] || {};
+  /* Rewritten pages replace the inherited WordPress copy entirely. */
+  const fresh = STATIC_PAGES[url];
+  const bodyCopy = fresh ? fresh.html : rewrite(s.html);
   const body = `<div class="container"><div class="text-area">
   <h1>${esc(m.h1 || s.h1)}</h1>
   ${extra.before || ''}
-  ${rewrite(s.html)}
+  ${bodyCopy}
 </div></div>`;
   pages.push({ url, indexable: true, lastmod: s.dateModified || s.datePublished,
     html: layout({ url, title: m.title, description: m.description, jsonld, crumbs, body }) });
@@ -390,7 +423,6 @@ function buildAuthorHub(rewrite, images) {
   const url = '/author/';
   const m = META[url];
   const src = data.statics.find(s => s.url === url);
-  const intro = src ? rewrite(src.html.split('<div')[0]) : '';
   const cards = data.authors.map(a => {
     const img = images.get(imageKey(a.avatar));
     const wrote = casinos.filter(c => c.writtenBy?.slug === a.slug);
@@ -398,7 +430,7 @@ function buildAuthorHub(rewrite, images) {
     return `<li class="author-card">
       <a href="/author/${a.slug}/">${img ? picture(img, `${a.name}, ${a.role} at ${SITE.name}`, { width: 96 }) : ''}
       <span class="name">${esc(a.name)}</span></a>
-      <p class="role">${esc(a.role)}</p>
+      <p class="role">${esc(AUTHOR_BIOS[a.slug]?.focus || a.role)}</p>
       <p class="author-byline">${wrote.length} review${wrote.length === 1 ? '' : 's'} written &middot; ${checked.length} fact-checked</p>
     </li>`;
   }).join('\n');
@@ -412,9 +444,10 @@ function buildAuthorHub(rewrite, images) {
   ]);
   const body = `<div class="container"><div class="text-area">
   <h1>${esc(m.h1)}</h1>
-  ${intro}
+  ${AUTHOR_HUB.intro}
 </div>
-<ul class="author-grid">${cards}</ul></div>`;
+<ul class="author-grid">${cards}</ul>
+<div class="text-area">${AUTHOR_HUB.body}</div></div>`;
   pages.push({ url, indexable: true, lastmod: src?.dateModified,
     html: layout({ url, title: m.title, description: m.description, jsonld, crumbs, body }) });
 }
@@ -445,8 +478,8 @@ function buildAuthorProfile(a, images) {
       <div>${img ? picture(img, `${a.name}, ${a.role} at ${SITE.name}`, { width: 120 }) : ''}</div>
       <div>
         <h1>${esc(a.name)}</h1>
-        <p class="role"><strong>${esc(a.role)}</strong> at ${esc(SITE.name)}</p>
-        <p>${esc(description)}</p>
+        <p class="role"><strong>${esc(a.role)}</strong> at ${esc(SITE.name)} &middot; ${esc(AUTHOR_BIOS[a.slug]?.focus || '')}</p>
+        ${AUTHOR_BIOS[a.slug]?.bio || `<p>${esc(description)}</p>`}
         <p class="author-byline">${wrote.length} review${wrote.length === 1 ? '' : 's'} written &middot; ${checked.length} review${checked.length === 1 ? '' : 's'} fact-checked. Every review is written by one team member and independently verified by another, as set out in our <a href="/editorial-guidelines/">editorial guidelines</a>.</p>
       </div>
     </div>
@@ -489,7 +522,15 @@ function buildEditorialTeam(rewrite, images) {
     <li><strong>Revisit.</strong> Bonuses, banking limits and licences change, so pages are re-tested and re-dated rather than quietly edited.</li>
   </ul>
   <p>The full method, including how each scoring category is weighted, is set out in our <a href="/editorial-guidelines/">editorial guidelines</a>. Profiles for every team member are on the <a href="/author/">writers page</a>, and the reasoning behind our ratings is explained in <a href="/why-trust-us/">why trust us</a>.</p>
-  <p>Spotted something out of date? <a href="/contact-us/">Tell us</a> — corrections are published with a new date stamp.</p>
+  <h2>Why two names appear on every review</h2>
+  <p>A single reviewer can be wrong in good faith. They can misread a rollover clause, trust a licence badge without looking the number up, or get one unusually fast withdrawal and generalise from it. The second name on each page exists to catch exactly that: an independent repeat of the licence lookup, the bonus arithmetic and at least one full deposit-and-withdrawal cycle. Where the two disagree, nothing publishes until the discrepancy is settled.</p>
+  <p>This is also why several brands we cover score poorly. Verification found claims that could not be substantiated — an unverifiable Malta licence on one site, an unconfirmed Curaçao claim on another, a regulator named only in general terms on a third. Those findings stayed in the reviews rather than being smoothed over.</p>
+
+  <h2>Independence</h2>
+  <p>No operator sees a review before it publishes, and none can pay for placement, a score or a ranking position. We do not sell backlinks or guest posts. Writers do not review brands they have any commercial relationship with, and nobody verifies their own work. The site is funded by affiliate commission, explained in full on our <a href="/about-us/">about page</a>.</p>
+
+  <h2>Corrections</h2>
+  <p>Spotted something out of date? <a href="/contact-us/">Tell us</a>. We verify every report ourselves and publish confirmed corrections with a new date stamp rather than editing quietly, so the change stays visible.</p>
 </div></div>`;
 
   pages.push({ url, indexable: true, lastmod: src?.dateModified || src?.datePublished,

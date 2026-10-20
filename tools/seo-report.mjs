@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE_URL, META, CASINO_NAMES } from '../config.mjs';
 import { HOMEPAGE } from '../content/homepage.mjs';
+import { rows as audit } from './content-audit.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist');
@@ -141,7 +142,33 @@ md.push(readFileSync(path.join(OUT, '_redirects'), 'utf8').trim());
 md.push('```');
 md.push('');
 
-md.push('## 5. Config values still to fill in');
+md.push('## 5. Content audit');
+md.push('');
+md.push('Overlap is the share of each page\'s 8-word shingles that also appear in the same page of the previously indexed WordPress export. High overlap means Google already saw that text on the old domain.');
+md.push('');
+md.push('| URL | Words | Old-text overlap | H2 | Internal links out | Inbound links | Robots |');
+md.push('|---|---|---|---|---|---|---|');
+for (const r of audit.slice().sort((a, b) => (b.overlap ?? -1) - (a.overlap ?? -1) || b.words - a.words)) {
+  md.push(`| \`${r.url}\` | ${r.words} | ${r.overlap === null ? '—' : r.overlap + '%'} | ${r.h2n} | ${r.uniqInternal} | ${r.inbound} | ${r.robots} |`);
+}
+const ind = audit.filter(r => r.robots === 'index');
+const high = ind.filter(r => r.overlap !== null && r.overlap >= 50);
+md.push('');
+md.push(`Indexable pages: **${ind.length}** · median length **${ind.map(r => r.words).sort((a, b) => a - b)[Math.floor(ind.length / 2)]} words** · pages still above 50% old-text overlap: **${high.length}** (all of them casino reviews).`);
+md.push('');
+md.push('### Remaining work — phased review rewrite');
+md.push('');
+md.push('The 14 review bodies are the only remaining block of inherited text. Each is ~4,000 words across a 14-section skeleton; the intro, TL;DR, verdict and conclusion are now original, but the analysis sections are not. Suggested order, highest link equity first:');
+md.push('');
+md.push('| Phase | Pages | Sections to rewrite | Est. new words |');
+md.push('|---|---|---|---|');
+md.push('| 1 | bk8, me88, maxim88, 96m (footer-linked, 33 inbound each) | Licence/security, bonuses, banking | ~4,000 |');
+md.push('| 2 | god55, winbox, mb8, eclbet | Same three sections | ~4,000 |');
+md.push('| 3 | bp9, gembet, b9casino, 12play, uea8, uwin33 | Same three sections | ~6,000 |');
+md.push('');
+md.push('Rewriting those three sections per review would take each page from ~85% to roughly 55–60% old text.');
+md.push('');
+md.push('## 6. Config values still to fill in');
 md.push('');
 md.push('| Constant | File | Current | Needed for |');
 md.push('|---|---|---|---|');

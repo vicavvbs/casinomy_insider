@@ -1,6 +1,6 @@
 # SEO relaunch report — casinomyinsider.com
 
-Generated: 2026-09-21  
+Generated: 2026-10-20  
 Canonical host: `https://casinomyinsider.com` (apex, https, trailing-slash URLs)  
 Pages built: 33 (24 indexable, 9 noindex)
 
@@ -172,7 +172,61 @@ http://casinomyinsider.com/*           https://casinomyinsider.com/:splat   301!
 /*.php                     /   301
 ```
 
-## 5. Config values still to fill in
+## 5. Content audit
+
+Overlap is the share of each page's 8-word shingles that also appear in the same page of the previously indexed WordPress export. High overlap means Google already saw that text on the old domain.
+
+| URL | Words | Old-text overlap | H2 | Internal links out | Inbound links | Robots |
+|---|---|---|---|---|---|---|
+| `/online-casino/12play/` | 4269 | 88% | 14 | 10 | 8 | index |
+| `/online-casino/gembet/` | 4200 | 88% | 15 | 10 | 8 | index |
+| `/online-casino/uea8/` | 4173 | 88% | 15 | 10 | 8 | index |
+| `/online-casino/eclbet/` | 4510 | 87% | 16 | 10 | 8 | index |
+| `/online-casino/b9casino/` | 3823 | 86% | 15 | 10 | 8 | index |
+| `/online-casino/bp9/` | 3958 | 85% | 15 | 10 | 8 | index |
+| `/online-casino/uwin33/` | 3773 | 85% | 16 | 10 | 8 | index |
+| `/online-casino/maxim88/` | 4233 | 84% | 18 | 9 | 33 | index |
+| `/online-casino/me88/` | 4087 | 84% | 18 | 9 | 33 | index |
+| `/online-casino/winbox/` | 3896 | 84% | 18 | 10 | 9 | index |
+| `/online-casino/bk8/` | 4096 | 83% | 18 | 10 | 33 | index |
+| `/online-casino/96m/` | 3977 | 83% | 18 | 9 | 33 | index |
+| `/online-casino/god55/` | 2899 | 80% | 18 | 14 | 8 | index |
+| `/online-casino/mb8/` | 4445 | 79% | 16 | 9 | 8 | index |
+| `/` | 4323 | 0% | 11 | 22 | 33 | index |
+| `/online-casino-review/` | 1065 | 0% | 19 | 17 | 33 | index |
+| `/about-us/` | 664 | 0% | 6 | 6 | 33 | index |
+| `/editorial-guidelines/` | 645 | 0% | 6 | 4 | 33 | index |
+| `/responsible-gambling/` | 640 | 0% | 6 | 3 | 33 | index |
+| `/privacy-policy/` | 620 | 0% | 9 | 2 | 33 | index |
+| `/why-trust-us/` | 572 | 0% | 8 | 5 | 33 | index |
+| `/editorial-team/` | 473 | 0% | 5 | 13 | 33 | index |
+| `/contact-us/` | 351 | 0% | 4 | 4 | 33 | index |
+| `/author/` | 268 | 0% | 2 | 9 | 33 | index |
+| `/author/david_ojei/` | 182 | 0% | 1 | 7 | 9 | noindex |
+| `/author/sarah_lee/` | 176 | 0% | 2 | 5 | 6 | noindex |
+| `/author/mark_podd/` | 157 | 0% | 1 | 5 | 7 | noindex |
+| `/author/andy_kwan/` | 156 | 0% | 2 | 3 | 4 | noindex |
+| `/author/daniel_pascoe/` | 151 | 0% | 2 | 4 | 5 | noindex |
+| `/author/dagmar_janssen/` | 150 | 0% | 1 | 4 | 5 | noindex |
+| `/author/funso_lawal/` | 149 | 0% | 1 | 4 | 5 | noindex |
+| `/author/ryan_bayani/` | 134 | 0% | 1 | 4 | 5 | noindex |
+| `/404.html` | 41 | — | 1 | 8 | 0 | noindex |
+
+Indexable pages: **24** · median length **3896 words** · pages still above 50% old-text overlap: **14** (all of them casino reviews).
+
+### Remaining work — phased review rewrite
+
+The 14 review bodies are the only remaining block of inherited text. Each is ~4,000 words across a 14-section skeleton; the intro, TL;DR, verdict and conclusion are now original, but the analysis sections are not. Suggested order, highest link equity first:
+
+| Phase | Pages | Sections to rewrite | Est. new words |
+|---|---|---|---|
+| 1 | bk8, me88, maxim88, 96m (footer-linked, 33 inbound each) | Licence/security, bonuses, banking | ~4,000 |
+| 2 | god55, winbox, mb8, eclbet | Same three sections | ~4,000 |
+| 3 | bp9, gembet, b9casino, 12play, uea8, uwin33 | Same three sections | ~6,000 |
+
+Rewriting those three sections per review would take each page from ~85% to roughly 55–60% old text.
+
+## 6. Config values still to fill in
 
 | Constant | File | Current | Needed for |
 |---|---|---|---|
