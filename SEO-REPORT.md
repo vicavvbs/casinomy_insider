@@ -1,6 +1,6 @@
 # SEO relaunch report — casinomyinsider.com
 
-Generated: 2026-10-20  
+Generated: 2026-11-03  
 Canonical host: `https://casinomyinsider.com` (apex, https, trailing-slash URLs)  
 Pages built: 33 (24 indexable, 9 noindex)
 
@@ -39,7 +39,7 @@ Duplicate primary keywords: **0** (none)
 
 ## 2. Homepage keyword usage
 
-On-page body copy: **3818 words** (H1, section headings, body and FAQ; title and meta description excluded).
+On-page body copy: **3835 words** (H1, section headings, body and FAQ; title and meta description excluded).
 
 | Term | Count |
 |---|---|
@@ -65,7 +65,7 @@ On-page body copy: **3818 words** (H1, section headings, body and FAQ; title and
 | is online casino legal in malaysia | 2 |
 | kasino dalam talian malaysia | 1 |
 
-**Primary keyword density:** "online casino malaysia" appears 14 times over 3818 words = **1.10%** (target 0.8–1.2%).
+**Primary keyword density:** "online casino malaysia" appears 14 times over 3835 words = **1.10%** (target 0.8–1.2%).
 
 ## 3. Every page: title, description, H1, canonical
 
@@ -178,27 +178,27 @@ Overlap is the share of each page's 8-word shingles that also appear in the same
 
 | URL | Words | Old-text overlap | H2 | Internal links out | Inbound links | Robots |
 |---|---|---|---|---|---|---|
-| `/online-casino/12play/` | 4269 | 88% | 14 | 10 | 8 | index |
-| `/online-casino/gembet/` | 4200 | 88% | 15 | 10 | 8 | index |
-| `/online-casino/uea8/` | 4173 | 88% | 15 | 10 | 8 | index |
-| `/online-casino/eclbet/` | 4510 | 87% | 16 | 10 | 8 | index |
-| `/online-casino/b9casino/` | 3823 | 86% | 15 | 10 | 8 | index |
-| `/online-casino/bp9/` | 3958 | 85% | 15 | 10 | 8 | index |
-| `/online-casino/uwin33/` | 3773 | 85% | 16 | 10 | 8 | index |
-| `/online-casino/maxim88/` | 4233 | 84% | 18 | 9 | 33 | index |
-| `/online-casino/me88/` | 4087 | 84% | 18 | 9 | 33 | index |
-| `/online-casino/winbox/` | 3896 | 84% | 18 | 10 | 9 | index |
-| `/online-casino/bk8/` | 4096 | 83% | 18 | 10 | 33 | index |
-| `/online-casino/96m/` | 3977 | 83% | 18 | 9 | 33 | index |
-| `/online-casino/god55/` | 2899 | 80% | 18 | 14 | 8 | index |
-| `/online-casino/mb8/` | 4445 | 79% | 16 | 9 | 8 | index |
-| `/` | 4323 | 0% | 11 | 22 | 33 | index |
-| `/online-casino-review/` | 1065 | 0% | 19 | 17 | 33 | index |
-| `/about-us/` | 664 | 0% | 6 | 6 | 33 | index |
+| `/` | 4741 | 0% | 12 | 22 | 33 | index |
+| `/online-casino/bk8/` | 1965 | 0% | 10 | 10 | 33 | index |
+| `/online-casino/me88/` | 1536 | 0% | 9 | 9 | 33 | index |
+| `/online-casino/maxim88/` | 1500 | 0% | 9 | 10 | 33 | index |
+| `/online-casino/96m/` | 1361 | 0% | 9 | 9 | 33 | index |
+| `/online-casino/mb8/` | 1352 | 0% | 9 | 9 | 8 | index |
+| `/online-casino/god55/` | 1326 | 0% | 9 | 10 | 8 | index |
+| `/online-casino/uea8/` | 1311 | 0% | 9 | 9 | 8 | index |
+| `/online-casino/uwin33/` | 1279 | 0% | 9 | 10 | 8 | index |
+| `/online-casino/gembet/` | 1263 | 0% | 9 | 9 | 8 | index |
+| `/online-casino/eclbet/` | 1252 | 0% | 9 | 9 | 8 | index |
+| `/online-casino/bp9/` | 1242 | 0% | 9 | 10 | 8 | index |
+| `/online-casino/12play/` | 1237 | 0% | 9 | 9 | 8 | index |
+| `/online-casino/winbox/` | 1220 | 0% | 9 | 10 | 8 | index |
+| `/online-casino/b9casino/` | 1212 | 0% | 9 | 9 | 8 | index |
+| `/online-casino-review/` | 1068 | 0% | 19 | 17 | 33 | index |
+| `/about-us/` | 669 | 0% | 6 | 6 | 33 | index |
 | `/editorial-guidelines/` | 645 | 0% | 6 | 4 | 33 | index |
 | `/responsible-gambling/` | 640 | 0% | 6 | 3 | 33 | index |
 | `/privacy-policy/` | 620 | 0% | 9 | 2 | 33 | index |
-| `/why-trust-us/` | 572 | 0% | 8 | 5 | 33 | index |
+| `/why-trust-us/` | 596 | 0% | 8 | 5 | 33 | index |
 | `/editorial-team/` | 473 | 0% | 5 | 13 | 33 | index |
 | `/contact-us/` | 351 | 0% | 4 | 4 | 33 | index |
 | `/author/` | 268 | 0% | 2 | 9 | 33 | index |
@@ -212,7 +212,7 @@ Overlap is the share of each page's 8-word shingles that also appear in the same
 | `/author/ryan_bayani/` | 134 | 0% | 1 | 4 | 5 | noindex |
 | `/404.html` | 41 | — | 1 | 8 | 0 | noindex |
 
-Indexable pages: **24** · median length **3896 words** · pages still above 50% old-text overlap: **14** (all of them casino reviews).
+Indexable pages: **24** · median length **1242 words** · pages still above 50% old-text overlap: **0** (all of them casino reviews).
 
 ### Remaining work — phased review rewrite
 

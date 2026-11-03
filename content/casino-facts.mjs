@@ -1,4 +1,6 @@
 /* Comparison-table facts, taken from each brand's own review page.
+   measuredPayoutMinutes is OUR timing, not the operator's claim — it stays null
+   until a real test is logged (see TEST-DATA-TODO.md).
    Anything the reviews do not state is left as null and renders as "See review"
    rather than being guessed at. */
 
@@ -8,6 +10,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '150% up to MYR 2,888 (live casino) or 100% up to MYR 300 (casino)',
     minDeposit: null,
     withdrawal: 'USDT under 30 min · FPX/DuitNow same day',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'Touch ’n Go', 'GrabPay', 'Visa/Mastercard', 'USDT', 'BTC'],
   },
   me88: {
@@ -15,6 +19,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '288% slots bonus up to MYR 2,880',
     minDeposit: null,
     withdrawal: 'USDT ~15 min · FPX/DuitNow same day',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'Touch ’n Go', 'USDT'],
   },
   maxim88: {
@@ -22,6 +28,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '288% slots & fishing up to MYR 288 (28× turnover)',
     minDeposit: 'MYR 200 (288% offer)',
     withdrawal: 'Crypto ~15 min · bank/e-wallet same day to 3 days',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'Touch ’n Go', 'USDT'],
   },
   '96m': {
@@ -29,6 +37,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '288% Magnificent bonus up to MYR 2,880 (35× rollover)',
     minDeposit: 'MYR 100',
     withdrawal: 'Crypto ~15 min · FPX/DuitNow often same day',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'USDT', 'BTC'],
   },
   god55: {
@@ -36,6 +46,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '255% first-deposit bonus (wagering applies)',
     minDeposit: null,
     withdrawal: 'Crypto ~15 min · FPX/DuitNow typically same day',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'USDT', 'BTC'],
   },
   winbox: {
@@ -43,6 +55,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '200% first-deposit bonus (30× rollover, 30 days)',
     minDeposit: 'MYR 100',
     withdrawal: 'USDT in minutes · local bank/e-wallet minutes to hours',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'Touch ’n Go', 'USDT'],
   },
   mb8: {
@@ -50,6 +64,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '200% spread across the first three deposits (16–22× rollover)',
     minDeposit: 'MYR 20',
     withdrawal: 'FPX/DuitNow QR and e-wallets processed instantly',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'Touch ’n Go', 'GrabPay'],
   },
   eclbet: {
@@ -57,6 +73,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '120% up to MYR 100 (22× wagering)',
     minDeposit: 'MYR 50',
     withdrawal: 'USDT under 30 min · bank transfer up to 24 h',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'USDT'],
   },
   bp9: {
@@ -64,13 +82,17 @@ export const CASINO_FACTS = {
     welcomeBonus: 'Dual 100% welcome bonuses',
     minDeposit: 'About MYR 90–220 equivalent',
     withdrawal: 'Bank transfer via ATM, CDM or FPX, mostly instant',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'ATM/CDM transfer', 'DuitNow'],
   },
   gembet: {
     licence: 'Curaçao licence #365/JAZ',
     welcomeBonus: '250% up to MYR 3,000',
     minDeposit: 'MYR 30',
-    withdrawal: 'USDT in about 10 min — the quickest we logged',
+    withdrawal: 'USDT in about 10 min (operator-published figure)',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'USDT'],
   },
   b9casino: {
@@ -78,6 +100,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '100% up to MYR 1,000',
     minDeposit: 'MYR 30',
     withdrawal: 'USDT ~15 min · bank transfer same day',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'USDT'],
   },
   '12play': {
@@ -85,6 +109,8 @@ export const CASINO_FACTS = {
     welcomeBonus: 'Up to MYR 588',
     minDeposit: null,
     withdrawal: 'Advertised at 15 min',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'USDT'],
   },
   uea8: {
@@ -92,6 +118,8 @@ export const CASINO_FACTS = {
     welcomeBonus: 'Three starter packs (promo code required)',
     minDeposit: 'MYR 30',
     withdrawal: 'USDT cashouts around 15 min',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'Malaysian bank transfer', 'USDT'],
   },
   uwin33: {
@@ -99,6 +127,8 @@ export const CASINO_FACTS = {
     welcomeBonus: '100% up to MYR 688',
     minDeposit: null,
     withdrawal: 'Crypto 10–30 min',
+    /* minutes, submit-to-arrival, from our own test. null = not yet measured. */
+    measuredPayoutMinutes: null,
     payments: ['FPX', 'DuitNow', 'Touch ’n Go', 'USDT'],
   },
 };

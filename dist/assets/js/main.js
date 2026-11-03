@@ -49,3 +49,33 @@
     });
   });
 })();
+
+/* ---- sortable comparison table (homepage) ---- */
+(function () {
+  'use strict';
+  var table = document.querySelector('.compare-table');
+  if (!table) return;
+  var tbody = table.querySelector('tbody');
+  if (!tbody) return;
+
+  document.querySelectorAll('.sort-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var key = btn.getAttribute('data-sort');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      rows.sort(function (a, b) {
+        var av = parseFloat(a.getAttribute('data-' + key));
+        var bv = parseFloat(b.getAttribute('data-' + key));
+        /* rating sorts high-to-low, payout time low-to-high */
+        return key === 'score' ? bv - av : av - bv;
+      });
+      rows.forEach(function (r, i) {
+        var rank = r.querySelector('.rank');
+        if (rank) rank.textContent = '#' + (i + 1);
+        tbody.appendChild(r);
+      });
+      document.querySelectorAll('.sort-btn').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+    });
+  });
+})();

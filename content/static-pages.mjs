@@ -14,7 +14,7 @@ export const STATIC_PAGES = {
 <p>CasinoMY Insider is an independent review site covering real-money online casinos available to players in Malaysia. We are not an operator, we do not run games, and we do not take bets. We test the platforms other people are about to hand money to, and we publish what we find.</p>
 
 <h2>Why we exist</h2>
-<p>Most casino "reviews" aimed at Malaysian players are rewritten press material. The bonus percentage gets repeated, the licence badge gets copied across, and nobody says what happens when you actually ask for your money back. That gap is the entire reason this site exists. Our scores come from accounts we opened, deposits we funded and withdrawals we timed.</p>
+<p>Most casino "reviews" aimed at Malaysian players are rewritten press material. The bonus percentage gets repeated, the licence badge gets copied across, and nobody says what happens when you actually ask for your money back. That gap is the entire reason this site exists. Our scores come from accounts we open ourselves, deposits we fund ourselves and withdrawals we time end to end.</p>
 <p>Being useful sometimes means being unflattering. Four of the fourteen brands we currently cover score 5 out of 10, and we explain exactly why rather than quietly leaving them off the list. A ranking where everyone wins tells you nothing.</p>
 
 <h2>What we actually do</h2>
@@ -77,7 +77,7 @@ ${stamp}`,
 <p>One team member writes the review. A second, named on the page alongside the author, independently repeats the critical checks — the licence lookup, the bonus arithmetic and at least one deposit and withdrawal cycle. If the two disagree, the review does not publish until the discrepancy is resolved. Both names and roles are listed on our <a href="/editorial-team/">editorial team</a> page.</p>
 
 <h2>We time the whole payout, not the convenient part</h2>
-<p>"Instant withdrawal" usually describes the moment an operator approves a request, not the moment money reaches you. We record both: the timestamp we hit submit and the timestamp funds actually land, repeated across different days because weekend and public-holiday behaviour is where sites quietly differ. The figures in our reviews are what we measured, not what the operator advertises.</p>
+<p>"Instant withdrawal" usually describes the moment an operator approves a request, not the moment money reaches you. We record both: the timestamp we hit submit and the timestamp funds actually land, repeated across different days because weekend and public-holiday behaviour is where sites quietly differ. Each review separates the two explicitly: a measured test log, and the operator's advertised figures alongside it. Where a test is still outstanding, the review says so rather than quoting the operator's number as though it were ours.</p>
 
 <h2>We verify licences at the register</h2>
 <p>A licence badge in a footer is an image, not a credential. We look the number up on the regulator's own register. Where a claim cannot be confirmed, we say so plainly and the score reflects it — that is precisely why Winbox sits at 7 out of 10 despite genuinely fast payouts, and why MB8's unverifiable claim costs it points.</p>

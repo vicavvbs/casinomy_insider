@@ -11,12 +11,17 @@ import { SITE_URL, SITE, META, AUTHOR_META, CASINO_NAMES, affiliateUrl } from '.
 import { esc, icon, rating, stars, slugify } from './lib/html.mjs';
 import { HOMEPAGE } from './content/homepage.mjs';
 import { CASINO_FACTS } from './content/casino-facts.mjs';
+import { CHANGELOG } from './content/changelog.mjs';
 import { REVIEW_COPY } from './content/review-intros.mjs';
 import { PAGE_COPY } from './content/page-copy.mjs';
 import { STATIC_PAGES } from './content/static-pages.mjs';
 import { HUB } from './content/hub.mjs';
 import { VERDICTS } from './content/verdicts.mjs';
 import { AUTHOR_HUB, AUTHOR_BIOS } from './content/authors.mjs';
+import { todoRegistry } from './lib/todo.mjs';
+import { readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+
 import { createRewriter, demote, toText, imageKey } from './lib/content.mjs';
 import sharp from 'sharp';
 import { buildImages } from './lib/images.mjs';
@@ -30,6 +35,13 @@ const data = JSON.parse(readFileSync(path.join(ROOT, 'data/pages.json'), 'utf8')
 const HOST = new URL(SITE_URL).host;
 /* Reviews and the homepage carry the build date as dateModified. */
 const BUILD_DATE = new Date().toISOString();
+/* Fully rewritten reviews live in content/reviews/<slug>.mjs. A casino with a
+   module there renders from it instead of the inherited WordPress body. */
+const REWRITTEN = {};
+for (const f of readdirSync(path.join(ROOT, 'content/reviews')).filter(f => f.endsWith('.mjs'))) {
+  const mod = await import(`./content/reviews/${f}`);
+  REWRITTEN[mod.default.slug] = mod.default;
+}
 const log = (...a) => console.log(...a);
 
 /* ---------------------------------------------------------------- helpers */
@@ -143,26 +155,34 @@ function buildHome(rewrite, images) {
   const tableRows = casinos.map((c, i) => {
     const f = CASINO_FACTS[c.slug] || {};
     const img = images.get(imageKey(c.logo));
-    return `<tr>
+    const measured = f.measuredPayoutMinutes;
+    return `<tr data-score="${c.score}" data-payout="${measured === null || measured === undefined ? 999999 : measured}">
       <th scope="row">
         <span class="rank">#${i + 1}</span>
         ${img ? picture(img, `${c.name} online casino logo`, { width: 64, lcp: i === 0 }) : ''}
         <span class="brand">${esc(c.name)}</span>
       </th>
       <td data-label="Rating">${rating(c.score, c.name)}</td>
+      <td data-label="Measured payout">${measured === null || measured === undefined
+        ? '<span class="muted">Not yet measured</span>'
+        : `<strong>${measured} min</strong>`}</td>
+      <td data-label="Advertised payout">${cell(f.withdrawal)}</td>
       <td data-label="Welcome bonus">${cell(f.welcomeBonus)}</td>
       <td data-label="Min deposit">${cell(f.minDeposit)}</td>
-      <td data-label="Withdrawal speed">${cell(f.withdrawal)}</td>
       <td data-label="Payments">${cell((f.payments || []).join(', '))}</td>
       <td data-label="Review"><a class="btn-ghost btn-sm" href="${c.url}">${esc(c.name)} review</a></td>
     </tr>`;
   }).join('\n');
 
   const comparison = `<div class="table-scroll"><table class="compare-table">
-    <caption class="visually-hidden">Online casino Malaysia sites compared by rating, bonus, minimum deposit, withdrawal speed and payment methods</caption>
+    <caption>Online casino Malaysia sites compared by rating, measured payout time, bonus, minimum deposit and payment methods. Use the Rating and Measured payout buttons to re-sort.</caption>
     <thead><tr>
-      <th scope="col">Casino</th><th scope="col">Rating</th><th scope="col">Welcome bonus</th>
-      <th scope="col">Min deposit</th><th scope="col">Withdrawal speed</th>
+      <th scope="col">Casino</th>
+      <th scope="col"><button type="button" class="sort-btn" data-sort="score" aria-pressed="true">Rating</button></th>
+      <th scope="col"><button type="button" class="sort-btn" data-sort="payout" aria-pressed="false">Measured payout</button></th>
+      <th scope="col">Advertised payout</th>
+      <th scope="col">Welcome bonus</th>
+      <th scope="col">Min deposit</th>
       <th scope="col">Payments</th><th scope="col">Review</th>
     </tr></thead>
     <tbody>${tableRows}</tbody>
@@ -178,6 +198,16 @@ function buildHome(rewrite, images) {
   ${inner}
 </div></div></section>`;
   }).join('\n');
+
+  const changelog = `<section class="section" aria-labelledby="h-changelog"><div class="container"><div class="panel">
+  <h2 id="h-changelog">Updated ${esc(CHANGELOG[0].month)}: what changed in our rankings</h2>
+  <p>We publish what moves and why, so you can see whether a ranking shifted because an operator improved or because we changed how we measure.</p>
+  ${CHANGELOG.map(e => `<div class="changelog-entry">
+    <h3>${esc(e.month)}</h3>
+    <p class="changelog-summary">${esc(e.summary)}</p>
+    <ul>${e.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
+  </div>`).join('')}
+</div></div></section>`;
 
   const faqSection = `<section class="section" aria-labelledby="h-faq"><div class="container"><div class="panel">
   <h2 id="h-faq">Online Casino Malaysia FAQ</h2>
@@ -208,6 +238,7 @@ function buildHome(rewrite, images) {
   <p class="brand-note">${icon('info')} <span>CasinoMY Insider is an independent review site funded by affiliate commission. Commission never changes a score — read <a href="/about-us/">about us</a> and <a href="/why-trust-us/">why trust us</a> for the full picture.</span></p>
 </div></div></section>
 ${rendered}
+${changelog}
 ${faqSection}`;
 
   pages.push({ url, indexable: true, lastmod: BUILD_DATE,
@@ -216,6 +247,36 @@ ${faqSection}`;
 }
 
 const rewriteYear = t => String(t).replace(/\b2025\b/g, '2026');
+
+function renderRewritten(r, c, images) {
+  const scoreTable = `<div class="table-scroll"><table class="score-table">
+    <caption class="visually-hidden">${esc(r.name)} category scores with reasoning</caption>
+    <thead><tr><th scope="col">Category</th><th scope="col">Score</th><th scope="col">Why</th></tr></thead>
+    <tbody>${r.scoring.map(x => `<tr><th scope="row">${esc(x.label)}</th><td class="score-cell">${x.score}/10</td><td>${esc(x.why)}</td></tr>`).join('')}</tbody>
+  </table></div>`;
+
+  const weakList = `<ol class="weaknesses">${r.weaknesses.map(w =>
+    `<li><strong>${esc(w.title)}</strong><p>${esc(w.detail)}</p></li>`).join('')}</ol>`;
+
+  const verdictBox = `<div class="verdict-box">
+    <div class="fit-yes"><h3>${icon('check')} Worth it for</h3><p>${esc(r.verdict.suits.charAt(0).toUpperCase() + r.verdict.suits.slice(1))}.</p></div>
+    <div class="fit-no"><h3>${icon('cross')} Avoid if you are</h3><p>${esc(r.verdict.avoid.charAt(0).toUpperCase() + r.verdict.avoid.slice(1))}.</p></div>
+  </div>
+  ${r.verdict.bottomLine}`;
+
+  return r.layout.map(id => {
+    const sec = r.sections[id];
+    if (!sec) return '';
+    let body = sec.html || '';
+    if (id === 'scoring') body += scoreTable;
+    if (id === 'weaknesses') body += weakList;
+    if (id === 'verdict') body += verdictBox;
+    return `<section class="panel" aria-labelledby="s-${id}">
+  <h2 id="s-${id}">${sec.h2}</h2>
+  ${body}
+</section>`;
+  }).join('\n');
+}
 
 function buildReview(c, rewrite, images) {
   const url = c.url;
@@ -295,7 +356,10 @@ function buildReview(c, rewrite, images) {
     c.faq.length ? S.faqPage(url, c.faq) : null,
   ]);
 
-  const body = `<div class="container">
+  const rw = REWRITTEN[c.slug];
+  const faqList = rw && rw.faq ? rw.faq : c.faq;
+
+  const head = `<div class="container">
   <div class="review-head">
     <p class="kicker">${esc(c.reviewTitle.replace(/2025/, '2026'))}</p>
     ${rating(c.score, c.name)}
@@ -308,14 +372,20 @@ function buildReview(c, rewrite, images) {
       <div class="review-logo">${logo ? picture(logo, `${c.name} online casino logo`, { width: 200, lcp: true }) : ''}</div>
       <div>
         <h1>${esc(rewriteYear(c.h1))}</h1>
-        ${copy.intro}
+        ${rw ? rw.lead : copy.intro}
         ${affiliateUrl(c.slug)
           ? `<div class="oc-cta"><a class="btn-gold" href="${esc(affiliateUrl(c.slug))}" target="_blank" rel="sponsored nofollow noopener">Play at ${esc(c.name)}</a></div>`
           : `<p class="cta-pending">${icon('info')}<span>We do not currently link out to ${esc(c.name)}. Our verdict is below, and you can <a href="/#h-shortlist">compare it against every casino we rate</a>.</span></p>`}
       </div>
     </div>
-  </section>
+  </section>`;
 
+  const faqBlockHtml = faqList.length ? `<section class="panel" aria-labelledby="faq-h">
+    <h2 id="faq-h">${esc(rw && rw.faqHeading ? rw.faqHeading : `FAQs about ${c.name}`)}</h2>
+    ${faqBlock(faqList, c.slug)}
+  </section>` : '';
+
+  const legacyBody = `
   <section class="panel" aria-labelledby="tldr-h">
     <h2 id="tldr-h">TL;DR — key takeaways</h2>
     ${copy.tldr}
@@ -342,13 +412,12 @@ function buildReview(c, rewrite, images) {
     ${verdict.conclusion}
   </section>` : ''}
 
-  ${c.faq.length ? `<section class="panel" aria-labelledby="faq-h">
-    <h2 id="faq-h">FAQs about ${esc(c.name)}</h2>
-    ${faqBlock(c.faq, c.slug)}
-  </section>` : ''}
+  ${tail ? `<div class="panel content">${rewrite(tail)}</div>` : ''}`;
 
-  ${tail ? `<div class="panel content">${rewrite(tail)}</div>` : ''}
-
+  const body = `${head}
+  ${rw ? renderRewritten(rw, c, images) : legacyBody}
+  ${faqBlockHtml}
+  <p class="compare-link panel"><a href="/#h-shortlist">Compare ${esc(c.name)} against every casino we rate &rarr;</a></p>
   ${relatedBlock(c.slug, images)}
 </div>`;
 
@@ -593,6 +662,26 @@ async function main() {
   for (const a of data.authors) buildAuthorProfile(a, images);
   build404(images);
 
+  /* lastmod from a content hash: a page's date moves only when its rendered
+     content actually changes, so rebuilds do not re-stamp the whole sitemap. */
+  const datesFile = path.join(ROOT, 'data/content-dates.json');
+  const prevDates = existsSync(datesFile) ? JSON.parse(readFileSync(datesFile, 'utf8')) : {};
+  const today = BUILD_DATE.slice(0, 10);
+  const nextDates = {};
+  for (const p of pages) {
+    /* hash the <main> content only, so furniture changes do not bump dates */
+    const main = (p.html.match(/<main[^>]*>([\s\S]*)<\/main>/) || [, p.html])[1];
+    const hash = createHash('sha1').update(main).digest('hex').slice(0, 16);
+    const prev = prevDates[p.url];
+    const changed = !prev || prev.hash !== hash;
+    nextDates[p.url] = { hash, date: changed ? today : prev.date };
+    p.lastmod = nextDates[p.url].date;
+  }
+  writeFileSync(datesFile, JSON.stringify(nextDates, null, 2) + '\n');
+  const bumped = Object.entries(nextDates)
+    .filter(([u, v]) => !prevDates[u] || prevDates[u].hash !== v.hash).length;
+  log(`  lastmod: ${bumped} page(s) changed this build, ${pages.length - bumped} kept their previous date`);
+
   /* write html */
   for (const p of pages) {
     const file = p.url === '/404.html' ? path.join(OUT, '404.html')
@@ -620,7 +709,7 @@ async function main() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${indexable.map(p => `  <url>
     <loc>${SITE_URL}${p.url}</loc>
-    <lastmod>${(p.lastmod || new Date().toISOString()).slice(0, 10)}</lastmod>
+    <lastmod>${(p.lastmod || today).slice(0, 10)}</lastmod>
   </url>`).join('\n')}
 </urlset>
 `;
@@ -672,6 +761,25 @@ http://${HOST}/*           ${SITE_URL}/:splat   301!
 /feed/                     /   301
 /*.php                     /   301
 `);
+
+  /* TODO checklist — every unmeasured figure in the rewritten reviews */
+  {
+    const todos = todoRegistry();
+    const bySlug = {};
+    for (const t of todos) (bySlug[t.slug] = bySlug[t.slug] || []).push(t);
+    const lines = ['# Test-data placeholders to fill', '',
+      `Generated: ${new Date().toISOString().slice(0, 10)}`, '',
+      `Every item below renders as a visible \`TODO\` on the live page. None of these figures has been`,
+      'invented — each needs a real measurement before the page should be treated as finished.', '',
+      `**${todos.length} placeholders across ${Object.keys(bySlug).length} reviews.**`, ''];
+    for (const [slug, items] of Object.entries(bySlug).sort()) {
+      lines.push(`## /online-casino/${slug}/ (${items.length})`, '');
+      for (const t of items) lines.push(`- [ ] \`${t.id}\` — ${t.label}`);
+      lines.push('');
+    }
+    writeFileSync(path.join(ROOT, 'TEST-DATA-TODO.md'), lines.join('\n'));
+    log(`  test-data placeholders: ${todos.length} across ${Object.keys(bySlug).length} reviews -> TEST-DATA-TODO.md`);
+  }
 
   /* report */
   log(`  pages: ${pages.length} (${indexable.length} indexable, ${pages.length - indexable.length} noindex)`);
