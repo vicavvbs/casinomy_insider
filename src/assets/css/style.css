@@ -404,8 +404,11 @@ figure { margin: 0 0 1rem; }
 @media (min-width: 640px) { .verdict .fit-grid { grid-template-columns: 1fr 1fr; } }
 
 /* ---------- rewritten review components ---------- */
-.test-log { min-width: 0; }
-.test-log th[scope="row"] { width: 42%; font-weight: 600; background: #fafbfb; }
+.test-log, .banking-table { min-width: 0; }
+.test-log th[scope="row"],
+.banking-table th[scope="row"] { width: 42%; font-weight: 600; background: #fafbfb; }
+.banking-table td { vertical-align: top; }
+.not-published { color: var(--muted, #6b7280); font-style: italic; }
 .score-table { min-width: 640px; }
 .score-table .score-cell { font-weight: 700; color: var(--gold-link); white-space: nowrap; }
 .score-table th[scope="row"] { font-weight: 600; width: 22%; }

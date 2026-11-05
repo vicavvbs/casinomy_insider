@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('god55', k, label);
 
 export default {
   slug: 'god55',
@@ -16,22 +14,22 @@ export default {
 <p>Understand the limits, though. A PAGCOR offshore certification governs the operator's conduct in its licensing jurisdiction. It gives a Malaysian player a complaints route of limited practical reach and nothing resembling the consumer protection a domestic regulator would provide. No operator serving this market holds a Malaysian licence, because none is issued — see our <a href="/responsible-gambling/">responsible gambling guide</a> for what that means in practice.</p>
 <p>The platform uses standard SSL encryption and runs 24/7 live chat. A recognisable brand ambassador is a marketing signal rather than a safety one, and we do not score it.</p>` },
 
-    tester: { h2: 'Deposit and withdrawal log', html: `
-<p>Our own money, an ordinary Malaysian payment method, timed from submission to arrival. Unmeasured values are marked.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">God55 deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by GOD55', html: `
+<p>Every figure below is published by GOD55 itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">GOD55 published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'TNG / DuitNow / FPX / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Amount withdrawn</th><td>${T('withdrawal-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, USDT, BTC, ETH</td></tr>
+<tr><th scope="row">Minimum deposit</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>About 15 minutes (USDT / BTC)</td></tr>
+<tr><th scope="row">Local payout speed</th><td>FPX and DuitNow typically same day; bank transfers 1–3 business days</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Transaction fees</th><td>Zero-fee policy on deposits and withdrawals</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td>Phone OTP verification</td></tr>
 </tbody>
 </table></div>
-<p>God55 publishes crypto settlement at roughly 15 minutes and same-day processing on FPX and DuitNow.</p>` },
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     games: { h2: 'A thousand games, and why that is the issue', html: `
 <p>More than 1,000 titles spanning slots, table games and a sportsbook. In isolation that is a reasonable catalogue — enough that no ordinary player exhausts it.</p>
@@ -75,7 +73,7 @@ export default {
     { q: 'Is God55 licensed?', a: 'Yes, under a PAGCOR offshore gambling certification that verifies on the regulator register. That puts it ahead of several brands on our list whose licensing claims could not be confirmed, though it provides little practical recourse from Malaysia.' },
     { q: 'How many games does God55 have?', a: 'More than 1,000 across slots, tables and sportsbook. That is adequate rather than generous — roughly a third of what BK8 offers in slots alone, and the shortfall is most visible among newer releases and smaller studios.' },
     { q: 'What is the wagering on the 255% bonus?', a: 'God55 does not publish the multiplier as prominently as the percentage. Market norms run 20× to 35×; at 25× on a MYR 200 deposit you would owe roughly MYR 12,750 of turnover. Confirm the figure in the terms before claiming.' },
-    { q: 'How fast does God55 pay?', a: 'Crypto is advertised at about 15 minutes, with FPX and DuitNow typically settling same day. Those timings match the better operators on our list. Our independently measured figure is in the test log above.' },
+    { q: 'How fast does God55 pay?', a: 'Crypto is advertised at about 15 minutes, with FPX and DuitNow typically settling same day. Those timings match the better operators on our list. The full published figures are in the banking table above.' },
     { q: 'Should I pick God55 over BK8 or 96M?', a: 'Only if you have a specific reason. God55 does nothing badly but leads in no category, while both of those brands offer materially more range and, in 96Ms case, clearer bonus terms.' },
   ],
 

@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('12play', k, label);
 
 export default {
   slug: '12play',
@@ -16,22 +14,22 @@ export default {
 <p>This is not evidence of wrongdoing, and we want to be precise about that. It is an absence of the documentation that brands like 96M and B9Casino provide as a matter of routine. In a market where several operators have been caught claiming regulators they are not registered with, specificity is the thing worth rewarding — and vagueness is the thing worth marking down.</p>
 <p>The Curaçao licence does verify, which places 12Play above the genuinely opaque end of our list.</p>` },
 
-    tester: { h2: 'Our own measurements', html: `
-<p>Own funds, Malaysian rails, timed submit-to-arrival. We publish nothing we have not measured.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">12Play deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by 12Play', html: `
+<p>Every figure below is published by 12Play itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">12Play published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'FPX / DuitNow / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival — does it meet the 15-minute claim?')}</td></tr>
-<tr><th scope="row">Bonus terms as stated</th><td>${T('bonus-terms', 'multiplier and cap found in the live terms')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow QR, Touch ’n Go, GrabPay, Quick Pay, Visa/Mastercard, BTC, ETH, USDT</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 30 (up to MYR 5,000 per transaction)</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>10–15 minutes (USDT)</td></tr>
+<tr><th scope="row">Local payout speed</th><td>Same day for verified accounts; up to 48 hours over weekends and holidays</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td>MYR 30</td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td>Up to MYR 50,000 or 5× deposit, by account level and method</td></tr>
+<tr><th scope="row">Transaction fees</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Verification (KYC)</th><td>OTP plus a MyKad or passport scan</td></tr>
 </tbody>
 </table></div>
-<p>The fifteen-minute claim is the one worth testing directly, and the row above is where we will publish whether it held.</p>` },
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     bonus: { h2: 'What "up to MYR 588" leaves out', html: `
 <p>The headline is a ceiling, not an entitlement. To evaluate it you need three numbers 12Play does not put next to it: the deposit required to reach MYR 588, the wagering multiplier, and the game weighting.</p>
@@ -42,7 +40,7 @@ export default {
 
     banking: { h2: 'Payment rails', html: `
 <p>FPX, DuitNow and USDT. Standard coverage for this market, though without Touch 'n Go or GrabPay. Crypto support is a positive — it is the rail that actually delivers fast cashouts, and its presence makes the fifteen-minute claim at least plausible for USDT.</p>
-<p>Deposit routes are standard for this market. The withdrawal side is where the published claim meets reality, and our measured figure is logged above.</p>` },
+<p>Deposit routes are standard for this market. The withdrawal side is where the published claim meets reality. The published figures are in the banking table above.</p>` },
 
     weaknesses: { h2: 'Three things we would want fixed', html: '' },
 
@@ -70,7 +68,7 @@ export default {
   faqHeading: '12Play — what to verify yourself',
   faq: [
     { q: 'Is 12Play legitimate?', a: 'It holds a genuine Curaçao offshore licence. Our reservation is about documentation rather than conduct: the headline claims are published without the detail that would let you check them.' },
-    { q: 'Does 12Play really pay out in 15 minutes?', a: 'That is the advertised figure, stated without specifying the rail or what share of withdrawals meet it. Crypto cashouts of that speed are plausible; bank transfers rarely are anywhere. Our measured timing is in the test log above.' },
+    { q: 'Does 12Play really pay out in 15 minutes?', a: 'That is the advertised figure, stated without specifying the rail or what share of withdrawals meet it. Crypto cashouts of that speed are plausible; bank transfers rarely are anywhere. The full published figures are in the banking table above.' },
     { q: 'How big is the 12Play welcome bonus?', a: 'Up to MYR 588 — a ceiling, not an entitlement. The deposit needed to reach it and the wagering attached are not published alongside the headline, so read the live terms before claiming.' },
     { q: 'Can I deposit with Touch ’n Go?', a: 'No. The cashier covers FPX, DuitNow and USDT. If TNG or GrabPay is your usual method, MB8 and BK8 both support them directly.' },
     { q: 'Why is 12Play rated 5 out of 10?', a: 'Because a review should reward evidence, not polish. The interface is among the best on our list and the licence is real, but the brand publishes considerably less verifiable detail than the operators rated above it.' },

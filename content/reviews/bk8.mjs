@@ -1,6 +1,4 @@
-import { TODO } from '../../lib/todo.mjs';
 
-const T = (k, label, hint) => TODO('bk8', k, label, hint);
 
 export default {
   slug: 'bk8',
@@ -10,29 +8,25 @@ export default {
   lead: `
 <p>BK8 is the brand Malaysian players name first, and the one most often held up as the benchmark everything else gets measured against. It runs a Curaçao master licence alongside a UK Gambling Commission white-label arrangement — a combination almost nobody else serving this market can claim — and backs it with a catalogue of more than 3,000 slots, over 300 live-dealer tables and a full sportsbook.</p>
 <p>The reputation is largely deserved. The licensing is checkable, the cashier handles every payment rail Malaysians actually use, and the platform does not fall over on a phone. What the marketing is quieter about is the cost of its bonuses: the headline figures are among the largest available, and so is the turnover needed to convert them.</p>
-<p>This review sets out what BK8 offers, what it charges you in wagering to take it, and where it falls short. Our own deposit and withdrawal timings are logged below — any figure we have not personally measured is marked rather than guessed.</p>`,
+<p>This review sets out what BK8 offers, what it charges you in wagering to take it, and where it falls short. BK8’s own published banking and payout figures are set out below, reproduced as the operator states them, with anything it does not publish marked rather than guessed.</p>`,
 
   sections: {
-    tester: {
-      h2: 'What our tester found',
-      html: `
-<p>We fund every account ourselves, through an ordinary Malaysian payment method, and time the withdrawal from the moment the request is submitted to the moment money lands. The log below is from our most recent test cycle on BK8.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">BK8 deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by BK8', html: `
+<p>Every figure below is published by BK8 itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">BK8 published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'TNG / DuitNow / FPX / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Amount withdrawn</th><td>${T('withdrawal-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">Support response</th><td>${T('support-time', 'live chat wait time and answer quality')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, Touch ’n Go, GrabPay, Visa/Mastercard, USDT, BTC</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 50</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>Under 30 minutes (USDT)</td></tr>
+<tr><th scope="row">Local payout speed</th><td>Same day (FPX / DuitNow)</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Transaction fees</th><td>Zero fees on all withdrawals</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td>Required before the first withdrawal; about 24 hours</td></tr>
 </tbody>
 </table></div>
-<p>For reference, BK8 advertises USDT withdrawals in under 30 minutes and same-day settlement on FPX and DuitNow. Those are the operator's own figures, not ours — treat the measured row above as the one that counts.</p>`,
-    },
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     scoring: {
       h2: 'How we scored BK8',
@@ -66,7 +60,7 @@ export default {
       h2: 'Deposits, withdrawals and the cashier',
       html: `
 <p>BK8 covers every rail that matters locally: FPX, DuitNow, Touch 'n Go, GrabPay, Visa and Mastercard, plus USDT and BTC. That breadth is unusual — several competitors accept an e-wallet deposit and then insist on paying out to a bank account, and BK8 largely avoids that mismatch.</p>
-<p>Crypto is the fast lane, as it is everywhere. The operator advertises USDT settlement in under 30 minutes and same-day processing on FPX and DuitNow during banking hours; our measured figure is in the test log above. Anything submitted late on a Friday should be expected to move on Monday regardless of what any casino advertises, because the delay sits with the banks rather than the operator.</p>
+<p>Crypto is the fast lane, as it is everywhere. The operator advertises USDT settlement in under 30 minutes and same-day processing on FPX and DuitNow during banking hours. Anything submitted late on a Friday should be expected to move on Monday regardless of what any casino advertises, because the delay sits with the banks rather than the operator.</p>
 <p>Verification is requested at the withdrawal stage rather than at sign-up. Upload documents when you register and you remove the single most common cause of a slow first payout.</p>`,
     },
 
@@ -78,7 +72,7 @@ export default {
     support: {
       h2: 'Support and mobile',
       html: `
-<p>Live chat runs 24/7 and is the only realistic route in — there is no telephone line, which will irritate anyone who wants to escalate a payout dispute by voice. In testing, straightforward questions came back quickly; the more awkward question about bonus weighting is the one worth judging an operator on, and our timing for that exchange is logged above.</p>
+<p>Live chat runs 24/7 and is the only realistic route in — there is no telephone line, which will irritate anyone who wants to escalate a payout dispute by voice. BK8 does not publish a target response time for live chat, so treat availability rather than speed as the thing it commits to.</p>
 <p>The mobile side is handled with native apps on both Android and iOS plus a responsive site, and the cashier works properly on a phone rather than being a desktop layout squeezed sideways. Mobile is the weakest of BK8's high scores, not because anything is broken but because the app occasionally lags behind the desktop build when new promotions launch.</p>`,
     },
 

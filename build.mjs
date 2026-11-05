@@ -155,17 +155,13 @@ function buildHome(rewrite, images) {
   const tableRows = casinos.map((c, i) => {
     const f = CASINO_FACTS[c.slug] || {};
     const img = images.get(imageKey(c.logo));
-    const measured = f.measuredPayoutMinutes;
-    return `<tr data-score="${c.score}" data-payout="${measured === null || measured === undefined ? 999999 : measured}">
+    return `<tr data-score="${c.score}">
       <th scope="row">
         <span class="rank">#${i + 1}</span>
         ${img ? picture(img, `${c.name} online casino logo`, { width: 64, lcp: i === 0 }) : ''}
         <span class="brand">${esc(c.name)}</span>
       </th>
       <td data-label="Rating">${rating(c.score, c.name)}</td>
-      <td data-label="Measured payout">${measured === null || measured === undefined
-        ? '<span class="muted">Not yet measured</span>'
-        : `<strong>${measured} min</strong>`}</td>
       <td data-label="Advertised payout">${cell(f.withdrawal)}</td>
       <td data-label="Welcome bonus">${cell(f.welcomeBonus)}</td>
       <td data-label="Min deposit">${cell(f.minDeposit)}</td>
@@ -175,12 +171,11 @@ function buildHome(rewrite, images) {
   }).join('\n');
 
   const comparison = `<div class="table-scroll"><table class="compare-table">
-    <caption>Online casino Malaysia sites compared by rating, measured payout time, bonus, minimum deposit and payment methods. Use the Rating and Measured payout buttons to re-sort.</caption>
+    <caption>Online casino Malaysia sites compared by rating, advertised payout speed, bonus, minimum deposit and payment methods. Use the Rating button to re-sort.</caption>
     <thead><tr>
       <th scope="col">Casino</th>
       <th scope="col"><button type="button" class="sort-btn" data-sort="score" aria-pressed="true">Rating</button></th>
-      <th scope="col"><button type="button" class="sort-btn" data-sort="payout" aria-pressed="false">Measured payout</button></th>
-      <th scope="col">Advertised payout</th>
+      <th scope="col">Payout speed (advertised)</th>
       <th scope="col">Welcome bonus</th>
       <th scope="col">Min deposit</th>
       <th scope="col">Payments</th><th scope="col">Review</th>
@@ -767,6 +762,17 @@ http://${HOST}/*           ${SITE_URL}/:splat   301!
     const todos = todoRegistry();
     const bySlug = {};
     for (const t of todos) (bySlug[t.slug] = bySlug[t.slug] || []).push(t);
+    if (todos.length === 0) {
+      writeFileSync(path.join(ROOT, 'TEST-DATA-TODO.md'), [
+        '# Test-data placeholders to fill', '',
+        `Generated: ${new Date().toISOString().slice(0, 10)}`, '',
+        'None. The reviews currently publish the operators\' own advertised banking figures',
+        '(see `content/banking-facts.mjs`) and make no first-hand measurement claims.', '',
+        'If real deposit/withdrawal tests are run later, add them through the TODO helper',
+        'so unmeasured rows stay visibly marked rather than estimated.', '',
+      ].join('\n'));
+      log('  test-data placeholders: none outstanding');
+    } else {
     const lines = ['# Test-data placeholders to fill', '',
       `Generated: ${new Date().toISOString().slice(0, 10)}`, '',
       `Every item below renders as a visible \`TODO\` on the live page. None of these figures has been`,
@@ -779,6 +785,7 @@ http://${HOST}/*           ${SITE_URL}/:splat   301!
     }
     writeFileSync(path.join(ROOT, 'TEST-DATA-TODO.md'), lines.join('\n'));
     log(`  test-data placeholders: ${todos.length} across ${Object.keys(bySlug).length} reviews -> TEST-DATA-TODO.md`);
+    }
   }
 
   /* report */

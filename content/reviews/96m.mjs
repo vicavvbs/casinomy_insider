@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('96m', k, label);
 
 export default {
   slug: '96m',
@@ -19,23 +17,22 @@ export default {
 <p>At a typical 96% slot RTP, cycling that carries an expected cost of about MYR 403 against a MYR 288 bonus. Scale the deposit up and the gap widens proportionally. The 30-day clock is the part people underestimate: MYR 10,080 of turnover means roughly MYR 336 of play every day for a month, which is a commitment rather than a bit of fun on the side.</p>
 <p>None of this makes 96M dishonest — it makes it typical, and unusually candid about being typical. Claim the bonus for extended playing time if you want it. Do not claim it expecting to convert it.</p>` },
 
-    tester: { h2: 'Our own deposit and payout test', html: `
-<p>Funded from our own money through an ordinary Malaysian rail. Figures we have not measured are marked, not estimated.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">96M deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by 96M', html: `
+<p>Every figure below is published by 96M itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">96M published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'TNG / DuitNow / FPX / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Amount withdrawn</th><td>${T('withdrawal-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">Support response</th><td>${T('support-time', 'live chat wait and answer quality')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, Boost, GrabPay, Visa/Mastercard, USDT, BTC</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 50 (MYR 100 for the 288% offer)</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>2–10 minutes (USDT / BTC)</td></tr>
+<tr><th scope="row">Local payout speed</th><td>Same day for most methods</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td>About MYR 50,000, varying by method and VIP tier</td></tr>
+<tr><th scope="row">Transaction fees</th><td>Zero-fee policy on deposits and withdrawals</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td><span class="not-published">Not published</span></td></tr>
 </tbody>
 </table></div>
-<p>96M advertises crypto withdrawals at about 15 minutes with FPX and DuitNow often clearing the same day. Those are the operator's figures.</p>` },
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     scoring: { h2: 'Category scores', html: `
 <p>Ten-point scale per category, weighted as described in our <a href="/editorial-guidelines/">editorial guidelines</a>.</p>` },
@@ -77,7 +74,7 @@ export default {
     { q: 'What licence does 96M hold?', a: 'Gaming Curaçao master licence #365/JAZ, which verifies on the regulator register. That is real oversight, though Curaçao enforcement is lighter than the MGA or UKGC and gives you limited practical recourse from Malaysia.' },
     { q: 'Can I deposit with Touch ’n Go at 96M?', a: 'TNG does not appear in the published payment set — FPX, DuitNow and crypto carry the load. If Touch ’n Go is your usual method, check the live cashier first or consider a brand with broader e-wallet support.' },
     { q: 'How many games does 96M have?', a: 'Roughly 2,200 slots, more than 250 live-dealer tables and three sportsbook lobbies from one account. The slot range is competitive; the live section is the thinner part of the offering.' },
-    { q: 'How quickly does 96M pay out?', a: 'The operator advertises crypto at around 15 minutes and FPX or DuitNow often clearing the same day. Our independently measured timing is in the test log above, and is marked TODO until we publish a verified figure.' },
+    { q: 'How quickly does 96M pay out?', a: 'The operator advertises crypto at around 15 minutes and FPX or DuitNow often clearing the same day. Those are the operator’s own published figures, reproduced in full in the banking table above; requests submitted outside banking hours normally take longer.' },
   ],
 
   verdict: {

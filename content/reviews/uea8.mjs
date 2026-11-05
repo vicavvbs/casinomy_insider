@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('uea8', k, label);
 
 export default {
   slug: 'uea8',
@@ -26,21 +24,22 @@ export default {
 <p>Context matters in both directions. One complaint against an operator processing many thousands of transactions is not proof of systemic failure, and we make no claim of having had a problem ourselves. But an <em>unresolved</em> complaint is different from a resolved one: it suggests either a dispute process that does not conclude, or a decision the player disputes and cannot escalate. Under an offshore licence, neither has a good remedy.</p>
 <p>Our recommendation follows directly from that: deposit small, verify early, and withdraw regularly rather than letting a balance accumulate.</p>` },
 
-    tester: { h2: 'Test log', html: `
-<p>Own funds, Malaysian rails, timed.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">UEA8 deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by UEA8', html: `
+<p>Every figure below is published by UEA8 itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">UEA8 published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Promo pack selected</th><td>${T('promo-pack', 'which of the three starter packs was claimed')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'FPX / DuitNow / bank / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">Complaint status check</th><td>${T('complaint-check', 'current status of the 2023 complaint at time of testing')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, e-wallets, bank transfer, USDT</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 50 (MYR 30 for bonus eligibility), up to MYR 30,000 per transaction</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>10–15 minutes (USDT)</td></tr>
+<tr><th scope="row">Local payout speed</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td>MYR 50</td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td>MYR 50,000 per day for bank transfer and crypto; MYR 5,000 per day for e-wallets</td></tr>
+<tr><th scope="row">Transaction fees</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Verification (KYC)</th><td><span class="not-published">Not published</span></td></tr>
 </tbody>
-</table></div>` },
+</table></div>
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     banking: { h2: 'A properly localised cashier', html: `
 <p>FPX, DuitNow, Malaysian bank transfers and USDT. This is one of the better-localised payment setups we have reviewed — UEA8 has clearly built for this market rather than bolting Malaysian rails onto an international template.</p>

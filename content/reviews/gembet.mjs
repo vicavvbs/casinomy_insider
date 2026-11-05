@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('gembet', k, label);
 
 export default {
   slug: 'gembet',
@@ -13,25 +11,25 @@ export default {
   sections: {
     payouts: { h2: 'Ten-minute withdrawals — the claim and the caveat', html: `
 <p>GemBet publishes USDT settlement at around ten minutes. For context, BK8 advertises under 30, me88 and 96M around 15, and several brands on our list decline to give a number at all. If the figure holds consistently, it is the best in this market.</p>
-<p>Two caveats. First, crypto payouts are fast everywhere — the rail does the work, not the operator — so a ten-minute USDT cashout is less remarkable than it sounds and tells you little about how a bank transfer behaves. Second, an advertised figure is an advertised figure. Our own measurement is logged below, and where that row is still marked TODO we have not yet published a verified timing.</p>
+<p>Two caveats. First, crypto payouts are fast everywhere — the rail does the work, not the operator — so a ten-minute USDT cashout is less remarkable than it sounds and tells you little about how a bank transfer behaves. Second, an advertised figure is an advertised figure. The table below reproduces what GemBet publishes; we have not independently timed a cashout, so treat it as the operator’s commitment rather than a verified result.</p>
 <p>Speed also only matters at the moment of a dispute, which is precisely when it stops applying. A fast routine payout and a contested one are different processes.</p>` },
 
-    tester: { h2: 'Our measured test', html: `
-<p>Own money, ordinary rails, timed submit-to-arrival.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">GemBet deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by GemBet', html: `
+<p>Every figure below is published by GemBet itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">GemBet published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'FPX / DuitNow / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">USDT withdrawal — measured</th><td>${T('payout-time-crypto', 'submit-to-arrival on the crypto rail')}</td></tr>
-<tr><th scope="row">Local rail withdrawal — measured</th><td>${T('payout-time-local', 'submit-to-arrival on FPX or DuitNow')}</td></tr>
-<tr><th scope="row">Amount withdrawn</th><td>${T('withdrawal-amount', 'amount in MYR')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, Touch ’n Go, USDT</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 50</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>10 minutes (USDT)</td></tr>
+<tr><th scope="row">Local payout speed</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Transaction fees</th><td>Zero transaction fees</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td><span class="not-published">Not published</span></td></tr>
 </tbody>
 </table></div>
-<p>We time both rails separately here because the headline claim is crypto-specific, and most players will not be cashing out in USDT.</p>` },
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     bonus: { h2: 'A 250% bonus with a MYR 30 door', html: `
 <p>The welcome offer runs to 250% and a MYR 3,000 ceiling from a MYR 30 minimum — the second-lowest entry point on our list. The combination of a high cap and a low door is genuinely unusual; most operators pairing a large ceiling with a large minimum deposit.</p>
@@ -69,7 +67,7 @@ export default {
 
   faqHeading: 'GemBet — common questions',
   faq: [
-    { q: 'Is GemBet really the fastest payer?', a: 'It publishes the quickest figure we have seen — roughly ten minutes on USDT. That applies to crypto only, and crypto is fast across the board because the rail does the work. Our independently measured timings for both rails are in the test log above.' },
+    { q: 'Is GemBet really the fastest payer?', a: 'It publishes the quickest figure we have seen — roughly ten minutes on USDT. That applies to crypto only, and crypto is fast across the board because the rail does the work. The full published figures are in the banking table above.' },
     { q: 'What licence does GemBet hold?', a: 'Curaçao #365/JAZ, which verifies on the register. Genuine oversight, though Curaçao enforcement is lighter than MGA or UKGC and offers limited practical recourse from Malaysia.' },
     { q: 'How much is the GemBet welcome bonus?', a: '250% up to MYR 3,000, from a MYR 30 minimum deposit. The combination of a high ceiling and a low entry point is unusual — most operators pair a big cap with a big minimum.' },
     { q: 'Why is GemBet only rated 6 out of 10?', a: 'The slot library. Payout speed, licensing and bonus accessibility all score well; catalogue depth is materially behind BK8, me88 and 96M, and game range carries real weight in our scoring.' },

@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('eclbet', k, label);
 
 export default {
   slug: 'eclbet',
@@ -19,22 +17,22 @@ export default {
 <p class="calc">MYR 100 × 22 = <strong>MYR 2,200 of turnover</strong> to clear MYR 100.</p>
 <p>At 96% RTP the expected cost of that play is about MYR 88 — so clearing the bonus returns roughly MYR 12 in expectation. The 22× multiplier is actually below the market average, and the absolute turnover is modest. The offer is not predatory; it is simply too small to matter. Compare it against 96M's MYR 2,880 ceiling or GemBet's MYR 3,000 and the gap is obvious.</p>` },
 
-    tester: { h2: 'What our tester recorded', html: `
-<p>Own funds, Malaysian rails, timed from submission to arrival.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">ECLBET deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by ECLBET', html: `
+<p>Every figure below is published by ECLBET itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">ECLBET published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'FPX / DuitNow / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Amount withdrawn</th><td>${T('withdrawal-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, Touch ’n Go, USDT</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 30 (MYR 50 for the welcome offer)</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>Under 30 minutes (USDT)</td></tr>
+<tr><th scope="row">Local payout speed</th><td>Most within 30 minutes; major Malaysian banks usually within 24 hours</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td>MYR 50</td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Transaction fees</th><td>No charges on standard transactions</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td>SMS or WhatsApp OTP plus photo ID (MyKad or passport)</td></tr>
 </tbody>
 </table></div>
-<p>ECLBET states that around 90% of USDT withdrawals complete in under 30 minutes, with bank transfers taking up to 24 hours. Publishing a percentage rather than a flat claim is a more honest framing than most of this market manages.</p>` },
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     banking: { h2: 'Payment rails', html: `
 <p>FPX, DuitNow and USDT. Narrower than brands supporting Touch 'n Go and GrabPay, but it covers the two local rails that carry most volume plus the crypto fast lane.</p>

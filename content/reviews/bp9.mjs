@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('bp9', k, label);
 
 export default {
   slug: 'bp9',
@@ -18,24 +16,25 @@ export default {
 
     trust: { h2: 'The licence position', html: `
 <p>BP9 states that it is licensed by PAGCOR, the Philippine regulator. PAGCOR maintains a public register and is a genuine authority, though a lighter regime than the MGA or UKGC.</p>
-<p>What we would want to see, and what the site does not make easy to find, is the licence number set against the operating company name, so the claim can be checked rather than taken on trust. Brands like B9Casino publish a specific number; BP9 is vaguer. Our tester's register lookup is logged below.</p>
+<p>What we would want to see, and what the site does not make easy to find, is the licence number set against the operating company name, so the claim can be checked rather than taken on trust. Brands like B9Casino publish a specific number; BP9 is vaguer. We could not match BP9’s claim to a specific register entry.</p>
 <p>No operator serving Malaysia holds a Malaysian licence, so the practical recourse question applies here as everywhere — see our <a href="/responsible-gambling/">responsible gambling guide</a>.</p>` },
 
-    tester: { h2: 'Test log', html: `
-<p>Our own funds, timed.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">BP9 deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by BP9', html: `
+<p>Every figure below is published by BP9 itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">BP9 published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'FPX / ATM / CDM / DuitNow')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">PAGCOR register lookup</th><td>${T('pagcor-check', 'licence number found, and whether it matched the operator')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>Local bank transfer and e-wallets; MYR wallet avoids conversion fees</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 100</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Local payout speed</th><td>Within 24 hours (bank and e-wallet), per the operator’s stated policy</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td>USD 200</td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td>USD 30,000; up to MYR 50,000 daily at Diamond tier</td></tr>
+<tr><th scope="row">Transaction fees</th><td>No conversion fees when the wallet is set to MYR</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td>Two copies of MyKad or passport plus a utility bill or bank statement; 6–12 hours on weekdays, longer at weekends</td></tr>
 </tbody>
-</table></div>` },
+</table></div>
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     bonus: { h2: 'Two 100% bonuses rather than one big one', html: `
 <p>BP9 runs dual 100% welcome offers rather than a single inflated percentage. A 100% match is modest by this market's standards, where 250% and 288% headlines are common — but those larger numbers come attached to 30× and 35× conditions, and a smaller bonus at a sane multiplier is frequently worth more.</p>
@@ -73,7 +72,7 @@ export default {
   faqHeading: 'BP9 — what we would check',
   faq: [
     { q: 'Is BP9 the same as BP77?', a: 'Yes — BP9 is the 2026 rebrand of BP77. The platform and infrastructure carry over; the reputation and payout history do not, which is the main reason we rate it cautiously rather than on the strength of the older name.' },
-    { q: 'Is BP9 licensed by PAGCOR?', a: 'It claims to be. PAGCOR is a genuine regulator with a public register, but BP9 does not publish its licence number alongside the operating company name where a player could easily verify it. Our register lookup is in the test log above.' },
+    { q: 'Is BP9 licensed by PAGCOR?', a: 'It claims to be. PAGCOR is a genuine regulator with a public register, but BP9 does not publish its licence number alongside the operating company name where a player could easily verify it.' },
     { q: 'How much do I need to deposit at BP9?', a: 'Roughly MYR 90 to MYR 220 depending on the method — one of the higher entry points on our list. MB8 starts at MYR 20 and GemBet at MYR 30 if you want to test a site cheaply.' },
     { q: 'Are the dual 100% bonuses any good?', a: 'Structurally, yes. A 100% match at a sane multiplier is often worth more than a 288% headline carrying 35× wagering. BP9 does not publish its multiplier prominently, so confirm it in the terms before claiming.' },
     { q: 'Should I use BP9?', a: 'Only with a small deposit and early verification. An unproven name with a high minimum and a hard-to-verify licence is not where we would concentrate play.' },

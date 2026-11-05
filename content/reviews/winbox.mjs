@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('winbox', k, label);
 
 export default {
   slug: 'winbox',
@@ -16,22 +14,22 @@ export default {
 <p>What is genuinely verifiable is the technical side: iTech Labs conducts independent RNG testing, and that certification is real. Fair games and an accountable operator are different questions, though. RNG audits tell you the slot is not rigged; a licence tells you who answers when your withdrawal stalls.</p>
 <p>We are not alleging anything improper. We are saying that a regulatory claim we cannot confirm has to be treated as unconfirmed, and priced accordingly. Our <a href="/why-trust-us/">verification process</a> explains how we check these.</p>` },
 
-    tester: { h2: 'What our tester measured', html: `
-<p>Our own funds, ordinary Malaysian rails, timed end to end. Unmeasured figures are marked rather than filled in.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">Winbox deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by Winbox', html: `
+<p>Every figure below is published by Winbox itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">Winbox published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'TNG / DuitNow / FPX / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Amount withdrawn</th><td>${T('withdrawal-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">Licence check outcome</th><td>${T('licence-check', 'result of the Curaçao register lookup on the test date')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, Touch ’n Go, USDT</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 30</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>Within 15 minutes (USDT)</td></tr>
+<tr><th scope="row">Local payout speed</th><td>E-wallet transfers within 15 minutes</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Transaction fees</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Verification (KYC)</th><td><span class="not-published">Not published</span></td></tr>
 </tbody>
-</table></div>` },
+</table></div>
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     banking: { h2: 'Payouts — the part that works', html: `
 <p>FPX, DuitNow, Touch 'n Go and USDT are all supported. Winbox advertises USDT withdrawals landing in "a few minutes" and local bank or e-wallet cashouts in minutes to hours, which would place it among the quicker payers we cover if it holds consistently.</p>
@@ -75,7 +73,7 @@ export default {
   faq: [
     { q: 'Is Winbox properly licensed?', a: 'Partly. The PAGCOR remote gaming seal is credible. The Curaçao #365/JAZ claim displayed alongside it did not verify for this operator when we checked the register, and we score unconfirmed claims as unconfirmed.' },
     { q: 'Are Winbox games fair?', a: 'The RNG testing by iTech Labs is genuine and independently verifiable, so the games themselves are audited. That is a separate question from whether the operator is accountable, which is where the licensing concern sits.' },
-    { q: 'How fast are Winbox withdrawals?', a: 'The operator advertises USDT in "a few minutes" and local bank or e-wallet cashouts in minutes to hours. Those are vaguer than we would like. Our measured figure is in the test log above.' },
+    { q: 'How fast are Winbox withdrawals?', a: 'The operator advertises USDT in "a few minutes" and local bank or e-wallet cashouts in minutes to hours. Those are vaguer than we would like. The full published figures are in the banking table above.' },
     { q: 'Is the 200% bonus worth taking?', a: 'It is one of the more reasonable offers on our list. A MYR 100 deposit generates MYR 6,000 of required turnover at 30× — demanding, but far more achievable than the 35× offers elsewhere, and all four conditions are published together.' },
     { q: 'Should I keep a large balance at Winbox?', a: 'We would not. Routine payouts appear to work well, but with one licence claim unconfirmed it is unclear which regulator you would escalate to if a withdrawal were ever disputed. Keep balances to an amount you would accept losing.' },
   ],

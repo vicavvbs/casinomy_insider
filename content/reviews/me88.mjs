@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('me88', k, label);
 
 export default {
   slug: 'me88',
@@ -15,23 +13,22 @@ export default {
     verdict: { h2: 'Verdict first', html: `
 <p>If this is your first Malaysian casino account, me88 is the sensible place to start. Nothing about the platform is designed to catch you out, verification is explained rather than sprung on you, and the licensing checks out. It is not the deepest library available and it is not the fastest payer — it is the one least likely to confuse you.</p>` },
 
-    tester: { h2: 'Our deposit and withdrawal test', html: `
-<p>Every figure below comes from an account we funded ourselves through an ordinary Malaysian payment method. Anything we have not personally measured is marked rather than estimated.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">me88 deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by me88', html: `
+<p>Every figure below is published by me88 itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">me88 published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'TNG / DuitNow / FPX / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Amount withdrawn</th><td>${T('withdrawal-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">Support response</th><td>${T('support-time', 'live chat wait and answer quality')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, Touch ’n Go, USDT</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 50</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>About 15 minutes (USDT)</td></tr>
+<tr><th scope="row">Local payout speed</th><td>Same day (FPX / DuitNow)</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Transaction fees</th><td>Deposits instant, no added fees</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td><span class="not-published">Not published</span></td></tr>
 </tbody>
 </table></div>
-<p>me88 advertises USDT settlement in roughly 15 minutes and same-day processing on FPX and DuitNow. Those are its own published figures — the measured row is the one to weigh.</p>` },
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     bonus: { h2: 'The 288% offer, and the part nobody reads', html: `
 <p>me88's welcome package splits across several products: a 288% slots bonus reaching MYR 2,880, a 200% eSports offer up to MYR 1,000, and smaller matched deals on live casino. The slots figure is the one in the advertising.</p>
@@ -79,7 +76,7 @@ export default {
     { q: 'Is me88 a good first casino account?', a: 'It is the one we recommend most often for newcomers. The cashier is uncluttered, the guides assume no prior knowledge, and support explains bonus terms rather than reciting them. None of that makes gambling safe — it makes the mechanics easier to follow.' },
     { q: 'What is the real cost of the 288% bonus?', a: 'On a MYR 200 deposit the bonus is MYR 576, and a 35× requirement on that portion means roughly MYR 20,160 of turnover. At 96% RTP the expected cost of that play is around MYR 806 — more than the bonus itself.' },
     { q: 'Who operates me88?', a: 'Brictec B.V., under Curaçao master licence #365/JAZ. Having a named operating company matters: several brands we review describe their regulation only in general terms, which leaves you nowhere to escalate.' },
-    { q: 'How fast are me88 withdrawals?', a: 'The operator advertises about 15 minutes on USDT and same-day settlement on FPX and DuitNow during banking hours. Our own measured figure is in the test log above; where that row is still marked TODO, we have not yet published a verified timing.' },
+    { q: 'How fast are me88 withdrawals?', a: 'The operator advertises about 15 minutes on USDT and same-day settlement on FPX and DuitNow during banking hours. Those are the operator’s own published figures, reproduced in full in the banking table above.' },
     { q: 'Does me88 have a sportsbook?', a: 'Three of them, in a single lobby. That is genuinely useful if you bet as well as play casino games, since you can compare lines without maintaining separate accounts. Note that sportsbook turnover usually does not count toward casino bonus wagering.' },
   ],
 

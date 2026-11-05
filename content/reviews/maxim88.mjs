@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('maxim88', k, label);
 
 export default {
   slug: 'maxim88',
@@ -20,23 +18,22 @@ export default {
 <p>Set against that, the headline welcome offer is comparatively modest and demands a MYR 200 minimum deposit, the highest entry point of any brand on our list. A player making one deposit and leaving gets a worse deal here than almost anywhere else we cover. A player running a regular monthly budget gets a better one.</p>
 <p>Loyalty schemes deserve one caution. They are worth having if you were going to play anyway; they are a problem the moment chasing a tier changes how much you stake. If you notice yourself depositing to maintain a level, that is the signal to stop — see our <a href="/responsible-gambling/">responsible gambling guide</a>.</p>` },
 
-    tester: { h2: 'What our tester found', html: `
-<p>Funded from our own account through an ordinary Malaysian method. Unmeasured figures are marked rather than guessed.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">Maxim88 deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by Maxim88', html: `
+<p>Every figure below is published by Maxim88 itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">Maxim88 published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'TNG / DuitNow / FPX / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Amount withdrawn</th><td>${T('withdrawal-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">Second withdrawal (bank rail)</th><td>${T('payout-time-bank', 'measured time for a bank or e-wallet cashout')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, Touch ’n Go, USDT</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 50 (MYR 200 for the 288% offer)</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>About 15 minutes</td></tr>
+<tr><th scope="row">Local payout speed</th><td>Same day to 3 days (bank and e-wallet)</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Transaction fees</th><td>Deposits processed instantly, no extra fees</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td><span class="not-published">Not published</span></td></tr>
 </tbody>
 </table></div>
-<p>Maxim88 publishes crypto settlement at roughly 15 minutes, and bank or e-wallet payouts at anywhere between same day and three days. Given that spread we time both rails separately — a single fast crypto cashout would not represent what most players experience.</p>` },
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     bonus: { h2: 'The welcome offer and its 28× condition', html: `
 <p>Two routes in: a 288% slots and fishing bonus capped at MYR 288 with 28× turnover and a MYR 200 minimum deposit, or a 100% multi-game match with lighter conditions. The percentage is eye-catching; the cap is what limits it.</p>
@@ -76,7 +73,7 @@ export default {
   faqHeading: 'Maxim88 — what people ask',
   faq: [
     { q: 'Is Maxim88 better for regular or occasional players?', a: 'Regular, clearly. Weekly reloads, cashback on losses and VIP withdrawal ceilings accumulate over months. A single deposit gets poorer value here than at most rivals because the welcome offer is capped and demands MYR 200 to unlock.' },
-    { q: 'How long do Maxim88 withdrawals take?', a: 'Crypto is advertised at around 15 minutes. Bank and e-wallet payouts are published at same day to three days, which is the widest range among our higher-rated brands. Our measured figures for both rails are in the test log above.' },
+    { q: 'How long do Maxim88 withdrawals take?', a: 'Crypto is advertised at around 15 minutes. Bank and e-wallet payouts are published at same day to three days, which is the widest range among our higher-rated brands. The full published figures are in the banking table above.' },
     { q: 'What does the 288% bonus actually pay?', a: 'Up to MYR 288, not 288% of any deposit size. Deposit the required MYR 200 and you receive the MYR 288 cap with a 28× requirement attached, meaning roughly MYR 8,064 of turnover before withdrawal.' },
     { q: 'Who runs Maxim88?', a: 'Brictec B.V. under Gaming Curaçao master licence #365/JAZ — the same operator behind me88. A named company with a checkable licence number is a meaningful step above brands that describe their regulation only in general terms.' },
     { q: 'Does Maxim88 have a mobile app?', a: 'Native apps on Android and iOS, with biometric login and a one-tap cashier. It is one of the stronger mobile implementations we have tested for this market.' },

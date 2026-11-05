@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('uwin33', k, label);
 
 export default {
   slug: 'uwin33',
@@ -14,24 +12,24 @@ export default {
     licence: { h2: 'A licence claim with nothing to check', html: `
 <p>Compare how three brands on our list describe their regulation. B9Casino publishes "PAGCOR master licence 0SP20-00012-A" — a number you can search. 96M publishes "Gaming Curaçao master licence #365/JAZ". Uwin33 publishes a sentence about leading industry organisations.</p>
 <p>The difference is not stylistic. A named regulator with a number gives you somewhere to verify the operator is permitted to trade and, if a withdrawal is refused, somewhere to complain. A general assurance gives you neither. It is the one disclosure that cannot reasonably be omitted, and omitting it is a decision rather than an oversight.</p>
-<p>We are not alleging Uwin33 is unlicensed. We are saying we cannot confirm that it is, and an unverifiable claim has to be scored as unverified. Our <a href="/why-trust-us/">verification process</a> describes how we check these, and our tester's lookup is logged below.</p>` },
+<p>We are not alleging Uwin33 is unlicensed. We are saying we cannot confirm that it is, and an unverifiable claim has to be scored as unverified. Our <a href="/why-trust-us/">verification process</a> describes how we check these, and in Uwin33’s case the claim could not be matched to a public register entry.</p>` },
 
-    tester: { h2: 'What our tester found', html: `
-<p>Own funds, Malaysian rails, timed.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">Uwin33 deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by Uwin33', html: `
+<p>Every figure below is published by Uwin33 itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">Uwin33 published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'TNG / FPX / DuitNow / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">Regulator named on request</th><td>${T('licence-ask', 'what live chat said when asked to name the regulator and licence number')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow, QR Pay (instant), BTC, ETH, USDT</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 30</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>10–30 minutes (BTC / ETH / USDT)</td></tr>
+<tr><th scope="row">Local payout speed</th><td>Instant deposits via FPX, DuitNow and QR Pay</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td>MYR 50,000 per day across crypto and fiat; maximum 2 cashouts per day</td></tr>
+<tr><th scope="row">Transaction fees</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Verification (KYC)</th><td>Required before a second withdrawal</td></tr>
 </tbody>
 </table></div>
-<p>That last row matters more than the rest. Asking support to name the regulator is a test any player can run in two minutes, and the answer is informative either way.</p>` },
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     banking: { h2: 'The cashier is the strong point', html: `
 <p>FPX, DuitNow and Touch 'n Go cover what Malaysians actually use, and USDT provides the fast lane. TNG support in particular puts Uwin33 ahead of 96M, ECLBET, GemBet and 12Play, none of which offer it.</p>
@@ -71,7 +69,7 @@ export default {
   faq: [
     { q: 'Who licenses Uwin33?', a: 'The site does not say. It refers to regulation by leading industry organisations without naming an authority or publishing a licence number. We could not verify any specific licence, and we score unverifiable claims as unverified.' },
     { q: 'Can I use Touch ’n Go at Uwin33?', a: 'Yes, alongside FPX, DuitNow and USDT. TNG support is genuinely useful and puts Uwin33 ahead of 96M, ECLBET, GemBet and 12Play, none of which accept it.' },
-    { q: 'How fast are Uwin33 withdrawals?', a: 'Crypto is advertised at ten to thirty minutes. No figure is published for FPX, DuitNow or TNG withdrawals, which is the route most players will use. Our measured timing is in the test log above.' },
+    { q: 'How fast are Uwin33 withdrawals?', a: 'Crypto is advertised at ten to thirty minutes. No figure is published for FPX, DuitNow or TNG withdrawals, which is the route most players will use. The full published figures are in the banking table above.' },
     { q: 'Is the MYR 688 bonus worth claiming?', a: 'Potentially — a 100% match is more realistic than the 288% headlines elsewhere. But the multiplier is not published alongside it, so confirm the figure in the terms before committing a session to clearing it.' },
     { q: 'Should I keep money at Uwin33?', a: 'We would not. The cashier is convenient, but with no named regulator there is no external body to escalate to if a withdrawal is ever refused. Keep balances small and withdraw regularly.' },
   ],

@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('mb8', k, label);
 
 export default {
   slug: 'mb8',
@@ -21,22 +19,22 @@ export default {
 <p>PAGCOR oversight is the part that holds up. That is a genuine regulator with a genuine register.</p>
 <p>The distinction matters because the MGA is one of the strictest regimes in the industry and PAGCOR is not. Claiming the former while demonstrably operating under the latter sets an expectation of protection that may not exist. If you only read one paragraph of this review, read this one.</p>` },
 
-    tester: { h2: 'Our test cycle', html: `
-<p>Own funds, local rails, timed. Nothing below is estimated.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">MB8 deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by MB8', html: `
+<p>Every figure below is published by MB8 itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">MB8 published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'TNG / DuitNow QR / FPX / GrabPay')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'seconds or minutes to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Amount withdrawn</th><td>${T('withdrawal-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">MGA register lookup</th><td>${T('mga-check', 'outcome of the MGA register search on the test date')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow QR, Touch ’n Go, GrabPay</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 20</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>About 15 minutes (USDT / BTC) for verified accounts</td></tr>
+<tr><th scope="row">Local payout speed</th><td>FPX, DuitNow QR and e-wallets processed instantly</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td>MYR 5,000 daily floor for VIP tiers</td></tr>
+<tr><th scope="row">Transaction fees</th><td>Zero-fee policy on all transactions</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td>Phone OTP for small cashouts; MyKad and bank statement for larger ones, about 12 hours on business days</td></tr>
 </tbody>
-</table></div>` },
+</table></div>
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     bonus: { h2: 'A 200% bonus split across three deposits', html: `
 <p>MB8 spreads its welcome offer over your first three deposits rather than loading everything onto the first, with rollover between 16× and 22× depending on the tranche. That structure is fairer than a single large match with punishing terms, and we would rather see more operators do it.</p>

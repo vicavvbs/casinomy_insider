@@ -1,5 +1,3 @@
-import { TODO } from '../../lib/todo.mjs';
-const T = (k, label) => TODO('b9casino', k, label);
 
 export default {
   slug: 'b9casino',
@@ -16,21 +14,22 @@ export default {
 <p>What we could not establish is the rest. Which company holds that licence, where it is incorporated, who to write to when live chat says no — these are the details that decide whether a dispute has anywhere to go. With a regulator as light-touch as PAGCOR, a complaint typically has to be pursued with the operator first, and that is hard to do against an entity you cannot name.</p>
 <p>The licence tells you the site is permitted to operate. It does not tell you who you would be arguing with.</p>` },
 
-    tester: { h2: 'What our tester found', html: `
-<p>Own funds, Malaysian rails, timed.</p>
-<div class="table-scroll"><table class="test-log">
-<caption class="visually-hidden">B9Casino deposit and withdrawal test log</caption>
+    tester: { h2: 'Banking and payout speeds, as published by B9Casino', html: `
+<p>Every figure below is published by B9Casino itself — in its cashier terms, banking page or promotional material. We have reproduced them rather than paraphrasing them, and marked anything the operator does not state. These are advertised speeds, not times we have measured, so treat them as the operator’s commitment rather than an independent result.</p>
+<div class="table-scroll"><table class="banking-table">
+<caption class="visually-hidden">B9Casino published banking and payout figures</caption>
 <tbody>
-<tr><th scope="row">Test date</th><td>${T('test-date', 'date of the test cycle')}</td></tr>
-<tr><th scope="row">Deposit method</th><td>${T('deposit-method', 'FPX / DuitNow / USDT')}</td></tr>
-<tr><th scope="row">Amount deposited</th><td>${T('deposit-amount', 'amount in MYR')}</td></tr>
-<tr><th scope="row">Deposit cleared in</th><td>${T('deposit-time', 'minutes from transfer to balance')}</td></tr>
-<tr><th scope="row">Verification</th><td>${T('kyc', 'documents requested, and turnaround')}</td></tr>
-<tr><th scope="row">Withdrawal method</th><td>${T('withdrawal-method', 'method used to cash out')}</td></tr>
-<tr><th scope="row">Measured payout time</th><td>${T('payout-time', 'submit-to-arrival, as measured')}</td></tr>
-<tr><th scope="row">Operator identity check</th><td>${T('operator-check', 'company name found behind licence 0SP20-00012-A, if any')}</td></tr>
+<tr><th scope="row">Deposit methods</th><td>FPX, DuitNow QR, bank transfer, USDT</td></tr>
+<tr><th scope="row">Minimum deposit</th><td>MYR 30</td></tr>
+<tr><th scope="row">Crypto payout speed</th><td>10–15 minutes (USDT)</td></tr>
+<tr><th scope="row">Local payout speed</th><td>Under 24 hours for verified accounts; bank transfers same day</td></tr>
+<tr><th scope="row">Minimum withdrawal</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Daily withdrawal cap</th><td><span class="not-published">Not published</span></td></tr>
+<tr><th scope="row">Transaction fees</th><td>FPX and DuitNow QR instant with no fees; no MYR conversion fees</td></tr>
+<tr><th scope="row">Verification (KYC)</th><td>MyKad or passport upload</td></tr>
 </tbody>
-</table></div>` },
+</table></div>
+<p>Advertised payout windows assume a fully verified account and a withdrawal submitted inside banking hours. Requests made overnight, at weekends or on public holidays commonly take longer than the headline figure, whichever operator you are dealing with.</p>` },
 
     bonus: { h2: 'The 100% welcome offer', html: `
 <p>A 100% match up to MYR 1,000 from a MYR 30 minimum. By this market's standards the percentage is restrained and the ceiling is decent — a combination we generally prefer to a 288% headline with punishing conditions behind it.</p>
@@ -71,7 +70,7 @@ export default {
   faq: [
     { q: 'Is B9Casino licensed by PAGCOR?', a: 'Yes. Master licence 0SP20-00012-A is published on the site and verifies on the register, alongside Curaçao oversight. Publishing a specific number is more than most brands on our list do.' },
     { q: 'Then why does it only score 5 out of 10?', a: 'Because the licence is only half the picture. We could not establish which company holds it or how a complaint escalates past live chat. Under an offshore regime, that corporate transparency is most of the protection you actually have.' },
-    { q: 'How fast does B9Casino pay?', a: 'The operator advertises roughly fifteen minutes on USDT and same-day settlement on bank transfers — timings that match brands we rate much higher. Our measured figure is in the test log above.' },
+    { q: 'How fast does B9Casino pay?', a: 'The operator advertises roughly fifteen minutes on USDT and same-day settlement on bank transfers — timings that match brands we rate much higher. The full published figures are in the banking table above.' },
     { q: 'What is the minimum deposit?', a: 'MYR 30, among the lower entry points on our list. That makes it inexpensive to test the site yourself before committing anything meaningful.' },
     { q: 'Is it safe to keep money at B9Casino?', a: 'We would keep balances small. If the published timings hold, the day-to-day experience is sound — but if a withdrawal were ever refused it is unclear who you would be pursuing.' },
   ],
